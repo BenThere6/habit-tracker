@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const smsUtility = require('./smsUtility');
+const { sendSMS } = require('./smsUtility');
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -22,7 +22,7 @@ app.post('/api/handleSmsReply', (req, res) => {
     const text = req.body.text;
 
     // Process the SMS reply here
-    console.log(`Received SMS reply from ${fromNumber}: ${text}`);
+    sendSMS(`Received SMS reply from ${fromNumber}: ${text}`);
 
     // You can send a response depending on the received reply
     // ...
