@@ -6,6 +6,14 @@ const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
+app.use((err, req, res, next) => {
+    console.error(err);
+    res.status(500).json({ error: 'Something went wrong' });
+  });
+
+app.get('/', (req,res) => {
+    res.sendFile(__dirname + '/html/index.html');
+})
 
 app.post('/sms-replies', (req, res) => {
   const textId = req.body.textId;
@@ -26,12 +34,6 @@ app.post('/api/handleSmsReply', (req, res) => {
   console.log(req.body)
 
   res.sendStatus(200); // Respond with a 200 OK status
-});
-
-// Error Handling Middleware
-app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Something went wrong' });
 });
 
 // Start the server
