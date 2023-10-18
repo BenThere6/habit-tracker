@@ -1,5 +1,15 @@
 {
   "dependencies": {
     "node-fetch": "^3.3.2"
-  }
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "name": "javascript",
+  "version": "1.0.0",
+  "main": "server.js",
+  "devDependencies": {},
+  "author": "",
+  "license": "ISC",
+  "description": ""
 }
