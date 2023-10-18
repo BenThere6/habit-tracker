@@ -1,0 +1,281 @@
+{
+    "currentP": 1,
+    "currentM": 1,
+    "today": "10/18/23",
+    "last_update": "10/17/23",
+    "rand_time1": "11:39",
+    "rand_time2": "16:07",
+    "rand_time3": "20:30",
+    "rand_time4": "",
+    "rand_sms_body": "Do a guided meditation now. We both know you need to.",
+    "daily_time": "21:48",
+    "daily_message": "How did you do today?",
+    "daily_message_backup": "You completed today. Good job!",
+    "morning_time": "08:45",
+    "morning_message": "Good morning! Make today great!",
+    "recipient": "+13853082520",
+    "responses": {
+        "p": "Keep moving forward. You got this!",
+        "m": "Keep moving forward. You got this!",
+        "b": "It's not over, you know that. Keep standing up. Keep moving forward. I love you. You got this.",
+        "n": "Way to go, my man! Don't you love how this feels?",
+        "u": "Nice job! Your processed urge has been noted.",
+        "s": "Your full scripture study has been noted. You will be blessed!",
+        "y": "Good job on doing 10 minutes of yoga! Your body will thank you.",
+        "e": "Your exercise has been noted. Better health is coming!",
+        "g": "Guided meditations are so helpful. Good job!",
+        "i love you": "I love you too. I will be with you, son. It will get better, and it will get easier. Take care, amen.",
+        "testing": "Way to go on getting your tests out of the way! Remember that you are loved and always worth my time.",
+        "?": "You have left: "
+    },
+    "processedUrges": {
+        "09/06/23": 1,
+        "09/07/23": 2,
+        "09/08/23": 2,
+        "09/09/23": 0,
+        "09/10/23": 3,
+        "09/11/23": 3
+    },
+    "history": {
+        "09/12/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 1
+        },
+        "09/13/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 1
+        },
+        "09/14/23": {
+            "pornography": 0,
+            "masturbation": 2,
+            "processed_urges": 2
+        },
+        "09/15/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 1,
+            "exercise": 2,
+            "guided_meditation": 1
+        },
+        "09/16/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 1,
+            "exercise": 3,
+            "guided_meditation": 2
+        },
+        "09/17/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 1,
+            "exercise": 1,
+            "guided_meditation": 1
+        },
+        "09/18/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 1,
+            "exercise": 0,
+            "guided_meditation": 2
+        },
+        "09/19/23": {
+            "pornography": 0,
+            "masturbation": 2,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 3
+        },
+        "09/20/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 1,
+            "guided_meditation": 2
+        },
+        "09/21/23": {
+            "pornography": 0,
+            "masturbation": 2,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 2
+        },
+        "09/22/23": {
+            "pornography": 1,
+            "masturbation": 1,
+            "processed_urges": 2,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 2
+        },
+        "09/23/23": {
+            "pornography": 3,
+            "masturbation": 3,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "09/24/23": {
+            "pornography": 1,
+            "masturbation": 1,
+            "processed_urges": 1,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 1,
+            "guided_meditation": 0
+        },
+        "09/25/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 1
+        },
+        "09/26/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 2,
+            "yoga": 0,
+            "exercise": 1,
+            "guided_meditation": 2
+        },
+        "09/27/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 2
+        },
+        "09/28/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 1
+        },
+        "10/07/23": {
+            "pornography": 1,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "10/08/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "10/09/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "10/10/23": {
+            "pornography": 2,
+            "masturbation": 3,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 1
+        },
+        "10/11/23": {
+            "pornography": 1,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "10/12/23": {
+            "pornography": 1,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 1
+        },
+        "10/13/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 1,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 0
+        },
+        "10/14/23": {
+            "pornography": 0,
+            "masturbation": 1,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 1,
+            "guided_meditation": 0
+        },
+        "10/16/23": {
+            "pornography": 2,
+            "masturbation": 2,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 3
+        },
+        "10/17/23": {
+            "pornography": 2,
+            "masturbation": 2,
+            "processed_urges": 0,
+            "scripture_study": 1,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 2
+        },
+        "10/18/23": {
+            "pornography": 0,
+            "masturbation": 0,
+            "processed_urges": 0,
+            "scripture_study": 0,
+            "yoga": 0,
+            "exercise": 0,
+            "guided_meditation": 2
+        }
+    }
+}
