@@ -1,7 +1,10 @@
 const express = require('express');
+const morgan = require('morgan');
 const bodyParser = require('body-parser');
+
 const app = express();
 
+app.use(morgan('combined'));
 app.use(bodyParser.json());
 
 app.post('/sms-replies', (req, res) => {
@@ -16,6 +19,12 @@ app.post('/sms-replies', (req, res) => {
   // ...
 
   res.sendStatus(200); // Respond with a 200 OK status
+});
+
+// Error Handling Middleware
+app.use((err, req, res, next) => {
+  console.error(err);
+  res.status(500).json({ error: 'Something went wrong' });
 });
 
 // Start the server
