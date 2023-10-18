@@ -22,7 +22,7 @@ app.post('/handleSmsReply', (req, res) => {
     const text = req.body.text;
 
     // Process the SMS reply here
-    smsUtility.sendSMS(`Received SMS reply from ${fromNumber}: ${text}`);
+    console.log(`Received SMS reply from ${fromNumber}: ${text}`);
 
     // You can send a response depending on the received reply
     // ...
