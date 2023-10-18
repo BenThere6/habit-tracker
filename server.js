@@ -37,7 +37,7 @@ app.post('/api/handleSmsReply', (req, res) => {
 });
 
 // Start the server
-const port = 3000;
+process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
