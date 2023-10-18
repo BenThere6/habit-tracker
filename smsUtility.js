@@ -1,11 +1,16 @@
-function sendSMS(recipient, message, key) {
+require('dotenv').config();
+
+function sendSMS(message) {
+    const recipient = process.env.PHONE_NUMBER;
+    const apiKey = process.env.API_KEY;
+
     fetch('https://textbelt.com/text', {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-            phone: '3855663025',
-            message: 'Hello world',
-            key: 'f0954f45e6a298c2d03611413734123ab0fc917erxqqZQaXJttCc3PzJsdeuLoWI',
+            phone: recipient,
+            message: message,
+            key: apiKey,
         }),
     }).then(response => {
         return response.json();
@@ -13,3 +18,5 @@ function sendSMS(recipient, message, key) {
         console.log(data);
     });
 }
+
+module.exports = { sendSMS }
