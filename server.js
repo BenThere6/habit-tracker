@@ -16,7 +16,7 @@ app.get('/', (req,res) => {
     res.sendFile(__dirname + '/public/index.html');
 })
 
-app.post('/handleSmsReply', (req, res) => {
+app.post('/api/handleSmsReply', (req, res) => {
     const textId = req.body.textId;
     const fromNumber = req.body.fromNumber;
     const text = req.body.text;
