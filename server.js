@@ -21,6 +21,14 @@ app.post('/sms-replies', (req, res) => {
   res.sendStatus(200); // Respond with a 200 OK status
 });
 
+// Add the route for handling SMS replies
+app.post('/api/handleSmsReply', (req, res) => {
+  // Process incoming SMS replies from TextBelt
+  // ...
+
+  res.sendStatus(200); // Respond with a 200 OK status
+});
+
 // Error Handling Middleware
 app.use((err, req, res, next) => {
   console.error(err);
