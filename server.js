@@ -1,5 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
+const smsUtility = require('smsUtility')
 const bodyParser = require('body-parser');
 
 const app = express();
@@ -31,13 +32,13 @@ app.post('/sms-replies', (req, res) => {
 
 // Add the route for handling SMS replies
 app.post('/api/handleSmsReply', (req, res) => {
-    console.log(req.body)
+    smsUtility.sendSMS(req.body)
 
     res.sendStatus(200); // Respond with a 200 OK status
 });
 
 // Start the server
-process.env.PORT || 3000;
+port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });
