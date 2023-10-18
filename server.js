@@ -22,7 +22,7 @@ app.post('/api/handleSmsReply', (req, res) => {
     const text = req.body.text;
 
     // Process the SMS reply here
-    sendSMS(`Received SMS reply from ${fromNumber}: ${text}`);
+    // sendSMS(`Received SMS reply from ${fromNumber}: ${text}`);
 
     // You can send a response depending on the received reply
     // ...
