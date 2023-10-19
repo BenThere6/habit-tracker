@@ -10,6 +10,7 @@ User.hasMany(Habit, {
     foreignKey: 'user_id',
     onDelete: 'CASCADE'
 })
+
 Habit.belongsTo(User)
 
 module.exports = { sequelize, User, Habit };
