@@ -10,7 +10,7 @@ function sendSMS(message) {
         body: JSON.stringify({
             phone: recipient,
             message: message,
-            replyWebhookUrl:"https://fierce-tor-16803-290b9f9ab8e3.herokuapp.com/api/handleSmsReply",
+            replyWebhookUrl:"https://fierce-tor-16803-290b9f9ab8e3.herokuapp.com/api/sms/handleSmsReply",
             key: apiKey,
         }),
     }).then(response => {
