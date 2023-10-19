@@ -1,6 +1,6 @@
 const express = require('express');
 const morgan = require('morgan');
-const { sendSMS } = require('./smsUtility');
+const { sendSMS } = require('./utils/sms');
 const bodyParser = require('body-parser');
 
 const app = express();
