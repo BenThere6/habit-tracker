@@ -21,16 +21,11 @@ app.post('/api/handleSmsReply', (req, res) => {
     const fromNumber = req.body.fromNumber;
     const text = req.body.text;
 
-    // Process the SMS reply here
-    // sendSMS(`Received SMS reply from ${fromNumber}: ${text}`);
+    console.log(`Received SMS reply from ${fromNumber}: ${text}`);
 
-    // You can send a response depending on the received reply
-    // ...
-
-    res.sendStatus(200); // Respond with a 200 OK status
+    res.sendStatus(200);
 });
 
-// Start the server
 port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
