@@ -1,7 +1,8 @@
 const router = require('express').Router();
 
 router.get('/', (req, res) => {
-    res.sendFile(__dirname + '/views/dashboard.html');
-})
+    // Render your dashboard page here.
+    res.render('dashboard'); // Customize this to match your dashboard view.
+});
 
 module.exports = router;
