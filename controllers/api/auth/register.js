@@ -5,7 +5,7 @@ const { User } = require('../../../models');
 // GET request to display the registration form
 router.get('/register', (req, res) => {
     // Render your registration form page
-    res.sendFile(__dirname + '/views/register.html');
+    res.render('register');
 });
 
 // POST request to handle user registration
@@ -16,7 +16,7 @@ router.post('/register', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (user) {
             // Email is already in use, handle this case
-            res.sendFile(__dirname + '/views/register.html', { message: 'Email already in use' });
+            res.redirect('/api/auth/register');
         } else {
             // Create a new user
             User.create({ email, password })
@@ -32,7 +32,7 @@ router.post('/register', (req, res, next) => {
                 })
                 .catch(err => {
                     // Handle the registration error
-                    res.sendFile(__dirname + '/views/register.html', { message: 'Registration failed' });
+                    res.render('register', { message: 'Registration failed' });
                 });
         }
     });

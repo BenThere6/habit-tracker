@@ -1,12 +1,12 @@
 const express = require('express');
 const router = express.Router();
 const passport = require('passport');
-const { User } = require('../../models');
+const { User } = require('../../../models');
 
 // GET request to display the login form
 router.get('/login', (req, res) => {
     // Render your login form page
-    res.sendFile(__dirname + '/views/login.html');
+    res.render('login')
 });
 
 // POST request to handle user login
@@ -17,13 +17,13 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (!user) {
             // User not found, handle this case
-            return res.redirect('/login');
+            return res.redirect('/api/auth/login');
         }
 
         // Check the password
         if (!user.checkPassword(password)) {
             // Password is incorrect, handle this case
-            return res.redirect('/login');
+            return res.redirect('/api/auth/login');
         }
 
         // Set up the user session after successful login
