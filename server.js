@@ -7,13 +7,14 @@ const morgan = require('morgan');
 const { sendSMS } = require('./utils/sendSms');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
-const { User } = require('./models'); // Import your User model
+const { User } = require('./models');
+const hbs = require('express-handlebars');
 
 const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true })); // Initialize session
+app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
@@ -46,6 +47,9 @@ passport.deserializeUser((id, done) => {
         done(null, user);
     });
 });
+
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {
