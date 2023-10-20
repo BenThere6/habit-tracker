@@ -21,7 +21,6 @@ app.use(flash());
 
 app.use(controllers);
 
-// Configure the local strategy for passport
 passport.use(new LocalStrategy({
     usernameField: 'email',
     passwordField: 'password',
@@ -37,7 +36,6 @@ passport.use(new LocalStrategy({
     });
 }));
 
-// Serialize and deserialize user data
 passport.serializeUser((user, done) => {
     done(null, user.id);
 });
@@ -50,6 +48,7 @@ passport.deserializeUser((id, done) => {
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
+app.set('views', path.join(__dirname, 'views'));
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {

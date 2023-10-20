@@ -2,13 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../../../models');
 
-// GET request to display the login form
 router.get('/login', (req, res) => {
-    // Render your login form page
     res.render('login')
 });
 
-// POST request to handle user login
 router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
 
@@ -19,7 +16,6 @@ router.post('/login', (req, res, next) => {
             return res.redirect('/api/auth/login');
         }
 
-        // Check the password
         if (!user.checkPassword(password)) {
             // Password is incorrect, handle this case
             return res.redirect('/api/auth/login');
@@ -30,7 +26,6 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            // Redirect to the dashboard or other authenticated route
             return res.redirect('/dashboard');
         });
     });

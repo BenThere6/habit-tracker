@@ -2,13 +2,10 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../../../models');
 
-// GET request to display the registration form
 router.get('/register', (req, res) => {
-    // Render your registration form page
     res.render('register');
 });
 
-// POST request to handle user registration
 router.post('/register', (req, res, next) => {
     const { email, password } = req.body;
 
@@ -26,12 +23,10 @@ router.post('/register', (req, res, next) => {
                         if (err) {
                             return next(err);
                         }
-                        // Redirect to the user's dashboard
                         res.redirect('/dashboard');
                     });
                 })
                 .catch(err => {
-                    // Handle the registration error
                     res.render('register', { message: 'Registration failed' });
                 });
         }
