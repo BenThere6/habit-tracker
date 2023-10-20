@@ -1,6 +1,6 @@
 const router = require('express').Router();
 
-app.post('/handleSmsReply', (req, res) => {
+router.post('/handleSmsReply', (req, res) => {
     const textId = req.body.textId;
     const fromNumber = req.body.fromNumber;
     const text = req.body.text;
