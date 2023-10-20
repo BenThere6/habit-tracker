@@ -1,6 +1,5 @@
 const express = require('express');
 const router = express.Router();
-const passport = require('passport');
 const { User } = require('../../../models');
 
 // GET request to display the login form
