@@ -49,7 +49,8 @@ passport.deserializeUser((id, done) => {
 
 app.engine('handlebars', hbs.engine);
 app.set('view engine', 'handlebars');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', 'views');
+app.use(express.static('public'));
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {
