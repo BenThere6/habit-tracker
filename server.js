@@ -9,6 +9,7 @@ const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const { User } = require('./models');
 const hbs = require('express-handlebars');
+const path = require('path');
 
 const app = express();
 
