@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../../../models');
+const path = require('path');
 
 router.get('/', (req, res) => {
-    res.render('register');
+    const filePath = path.join(__dirname, '../../../public/html/register.html');
+    res.sendFile(filePath);
 });
 
 router.post('/', (req, res, next) => {

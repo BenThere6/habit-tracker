@@ -1,9 +1,11 @@
 const express = require('express');
 const router = express.Router();
 const { User } = require('../../../models');
+const path = require('path');
 
 router.get('/', (req, res) => {
-    res.render('login')
+    const filePath = path.join(__dirname, '../../../public/html/login.html');
+    res.sendFile(filePath);
 });
 
 router.post('/', (req, res, next) => {
