@@ -6,12 +6,11 @@
     "express-handlebars": "^7.1.2",
     "express-session": "^1.17.3",
     "morgan": "^1.10.0",
-    "mysql": "^2.18.1",
-    "mysql2": "^3.6.2",
+    "mysql2": "^2.2.5",
     "node-fetch": "^3.3.2",
     "passport": "^0.6.0",
     "passport-local": "^1.0.0",
-    "sequelize": "^6.33.0"
+    "sequelize": "^6.3.5"
   },
   "scripts": {
     "start": "node server.js"
@@ -20,6 +19,6 @@
   "version": "1.0.0",
   "main": "server.js",
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "description": ""
 }
