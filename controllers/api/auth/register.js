@@ -2,11 +2,11 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../../../models');
 
-router.get('/register', (req, res) => {
+router.get('/', (req, res) => {
     res.render('register');
 });
 
-router.post('/register', (req, res, next) => {
+router.post('/', (req, res, next) => {
     const { email, password } = req.body;
 
     // Check if the email is already in use

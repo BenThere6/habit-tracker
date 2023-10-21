@@ -7,7 +7,6 @@ const { ensureAuthenticated } = require('./auth/authMiddleware');
 
 router.use('/dashboard', ensureAuthenticated, dashboardRoute);
 router.use('/sms', smsRoutes);
-
 router.use('/login', loginRoute);
 router.use('/register', registerRoute);
 
