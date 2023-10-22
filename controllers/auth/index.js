@@ -14,12 +14,12 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (!user) {
             // User not found, handle this case
-            return res.redirect('/api/login');
+            return res.redirect('/auth/login');
         }
 
         if (!user.checkPassword(password)) {
             // Password is incorrect, handle this case
-            return res.redirect('/api/login');
+            return res.redirect('/auth/login');
         }
 
         // Set up the user session after successful login
@@ -44,7 +44,7 @@ router.post('/register', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (user) {
             // Email is already in use, handle this case
-            res.redirect('/api/auth/register');
+            res.redirect('/auth/register');
         } else {
             // Create a new user
             User.create({ email, password })

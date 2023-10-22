@@ -4,7 +4,7 @@ function ensureAuthenticated(req, res, next) {
         return next();
     }
     // User is not authenticated, redirect to the login page or send an error response.
-    res.redirect('/api/login');
+    res.redirect('/auth/login');
 }
 
 module.exports = { ensureAuthenticated };
