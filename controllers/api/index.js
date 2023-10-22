@@ -1,13 +1,13 @@
 const router = require('express').Router();
-const smsRoutes = require('./sms');
-const dashboardRoute = require('./dashboard');
-const loginRoute = require('./auth/login');
-const registerRoute = require('./auth/register');
-const { ensureAuthenticated } = require('./auth/authMiddleware'); 
 
-router.use('/dashboard', ensureAuthenticated, dashboardRoute);
-router.use('/sms', smsRoutes);
-router.use('/login', loginRoute);
-router.use('/register', registerRoute);
+router.post('/handleSmsReply', (req, res) => {
+    const textId = req.body.textId;
+    const fromNumber = req.body.fromNumber;
+    const text = req.body.text;
+
+    console.log(`Received SMS reply from ${fromNumber}: ${text}`);
+
+    res.sendStatus(200);
+});
 
 module.exports = router;
