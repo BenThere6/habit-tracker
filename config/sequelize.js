@@ -18,4 +18,12 @@ if (process.env.JAWSDB_URL) {
   );
 }
 
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Tables created successfully, if not exist.');
+  })
+  .catch((err) => {
+    console.error('Error creating tables:', err);
+  });
+
 module.exports = sequelize;

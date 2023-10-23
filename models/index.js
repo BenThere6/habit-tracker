@@ -15,6 +15,14 @@ if (process.env.JAWSDB_URL) {
   });
 }
 
+sequelize.sync({ force: false })
+  .then(() => {
+    console.log('Tables created successfully, if not exist.');
+  })
+  .catch((err) => {
+    console.error('Error creating tables:', err);
+  });
+
 const User = require('./user');
 const Habit = require('./habit');
 

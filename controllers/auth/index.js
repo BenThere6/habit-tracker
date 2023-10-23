@@ -10,6 +10,11 @@ router.get('/login', (req, res) => {
 router.post('/login', (req, res, next) => {
     const { email, password } = req.body;
 
+    if (!email) {
+        // Handle the case where email is not provided
+        return res.redirect('/auth/login');
+    }
+
     // Use the User model to find the user by email
     User.findOne({ where: { email } }).then(user => {
         if (!user) {
@@ -45,19 +50,24 @@ router.post('/register', (req, res, next) => {
         if (user) {
             // Email is already in use, handle this case
             res.redirect('/auth/register');
+            console.log('User already exists.')
         } else {
             // Create a new user
             User.create({ email, password })
                 .then(user => {
+                    console.log('New user has been created.')
                     // Log the user in after registration
                     req.login(user, err => {
                         if (err) {
+                            console.log('Error logging in new user.')
                             return next(err);
                         }
+                        console.log('Redirecting new user to dashboard.')
                         res.redirect('/dashboard');
                     });
                 })
                 .catch(err => {
+                    console.log('Registration failed.')
                     res.render('register', { message: 'Registration failed' });
                 });
         }
