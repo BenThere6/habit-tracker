@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const path = require('path');
-const { ensureAuthenticated } = require('./auth/authMiddleware'); 
+const { ensureAuthenticated } = require('../middleware/authMiddleware'); 
 
 router.get('/dashboard', ensureAuthenticated, (req, res) => {
+    console.log('Rendering dashboard')
     res.render('dashboard');
 });
 

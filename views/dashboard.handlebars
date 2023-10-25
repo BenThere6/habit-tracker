@@ -1,1 +1,16 @@
 <h2>This is the dashboard!</h2>
+
+<h3>Add a New Habit:</h3>
+<form id="habit-form">
+    <label for="habitName">Habit Name:</label>
+    <input type="text" id="habitName" name="habitName" required>
+
+    <label for="habitType">Habit Type:</label>
+    <select id="habitType" name="habitType">
+        <option value="good">Good</option>
+        <option value="bad">Bad</option>
+    </select>
+
+    <button type="submit">Add Habit</button>
+</form>
+<script src="/js/dashboard.js"></script>

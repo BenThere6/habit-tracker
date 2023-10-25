@@ -3,19 +3,19 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
-const morgan = require('morgan');
 const { sendSMS } = require('./utils/sendSms');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const { User } = require('./models');
 const { engine } = require('express-handlebars')
 const crypto = require('crypto');
+const { clog } = require('./middleware/clog')
+const sessionSecret = crypto.randomBytes(32).toString('hex');
 
 const app = express();
 
-app.use(morgan('combined'));
+app.use(clog)
 app.use(bodyParser.json());
-const sessionSecret = crypto.randomBytes(32).toString('hex');
 app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());

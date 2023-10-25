@@ -1,6 +1,5 @@
 const router = require('express').Router();
 const { User } = require('../../models');
-const path = require('path');
 
 router.get('/login', (req, res) => {
     res.render('login')
@@ -35,7 +34,7 @@ router.post('/login', (req, res, next) => {
                 return next(err);
             }
             console.log('Successful login, redirecting to /dashboard.')
-            res.redirect('/dashboard');
+            res.redirect(303, '/dashboard');
             return;
         });
     });

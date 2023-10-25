@@ -1,4 +1,7 @@
 const router = require('express').Router();
+const habitRoutes = require('./habit');
+
+router.use('/habit', habitRoutes);
 
 router.post('/handleSmsReply', (req, res) => {
     const textId = req.body.textId;
