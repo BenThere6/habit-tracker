@@ -8,18 +8,22 @@ const { sendSMS } = require('./utils/sendSms');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const { User } = require('./models');
-const hbs = require('express-handlebars');
-const path = require('path');
+const { engine } = require('express-handlebars')
+const crypto = require('crypto');
 
 const app = express();
 
 app.use(morgan('combined'));
 app.use(bodyParser.json());
-app.use(session({ secret: 'your-secret-key', resave: true, saveUninitialized: true }));
+const sessionSecret = crypto.randomBytes(32).toString('hex');
+app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
-
+app.engine('handlebars', engine());
+app.set('view engine', 'handlebars');
+app.set('views', './views')
+app.use(express.static('public'));
 app.use(controllers);
 
 passport.use(new LocalStrategy({
@@ -46,11 +50,6 @@ passport.deserializeUser((id, done) => {
         done(null, user);
     });
 });
-
-app.engine('handlebars', hbs.engine);
-app.set('view engine', 'handlebars');
-app.set('views', 'views');
-app.use(express.static('public'));
 
 port = process.env.PORT || 3000;
 app.listen(port, () => {

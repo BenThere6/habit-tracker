@@ -12,6 +12,7 @@ router.post('/login', (req, res, next) => {
 
     if (!email) {
         // Handle the case where email is not provided
+        console.log('Email not provided.')
         return res.redirect('/auth/login');
     }
 
@@ -19,11 +20,13 @@ router.post('/login', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (!user) {
             // User not found, handle this case
+            console.log('User not found.')
             return res.redirect('/auth/login');
         }
 
         if (!user.checkPassword(password)) {
             // Password is incorrect, handle this case
+            console.log('Incorrect password.')
             return res.redirect('/auth/login');
         }
 
@@ -32,7 +35,9 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            return res.redirect('/dashboard');
+            console.log('Successful login, redirecting to /dashboard.')
+            res.redirect('/dashboard');
+            return;
         });
     });
 });
@@ -49,8 +54,8 @@ router.post('/register', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (user) {
             // Email is already in use, handle this case
-            res.redirect('/auth/register');
             console.log('User already exists.')
+            res.redirect('/auth/register');
         } else {
             // Create a new user
             User.create({ email, password })

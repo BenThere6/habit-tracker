@@ -15,9 +15,9 @@ if (process.env.JAWSDB_URL) {
   });
 }
 
-sequelize.sync({ force: false })
+sequelize.sync()
   .then(() => {
-    console.log('Tables created successfully, if not exist.');
+    console.log('Sequelize synced')
   })
   .catch((err) => {
     console.error('Error creating tables:', err);

@@ -19,7 +19,7 @@
         </ul>
     </nav>
     <main>
-        <form action="/auth/login" method="POST">
+        <form id="loginForm">
             <div>
                 <label for="email">Email:</label>
                 <input type="email" id="email" name="email" required>
@@ -36,5 +36,28 @@
     <footer>
         <p>&copy; 2023 Habit Tracker</p>
     </footer>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            fetch('/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email, password }),
+            })
+            .then(response => response.json())
+            .catch(error => {
+                console.error('Error:', error);
+            });
+
+            this.reset();
+        });
+    </script>
 </body>
 </html>
