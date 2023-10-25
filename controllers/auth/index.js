@@ -3,8 +3,7 @@ const { User } = require('../../models');
 const path = require('path');
 
 router.get('/login', (req, res) => {
-    const filePath = path.join(__dirname, '../../public/html/login.html');
-    res.sendFile(filePath);
+    res.render('login')
 });
 
 router.post('/login', (req, res, next) => {
@@ -43,8 +42,7 @@ router.post('/login', (req, res, next) => {
 });
 
 router.get('/register', (req, res) => {
-    const filePath = path.join(__dirname, '../../public/html/register.html');
-    res.sendFile(filePath);
+    res.render('register')
 });
 
 router.post('/register', (req, res, next) => {
