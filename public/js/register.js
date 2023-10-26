@@ -3,7 +3,7 @@ const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('confirm-password');
 const passwordError = document.getElementById('password-error');
 
-registrationForm.addEventListener('submit', function (event) {
+registrationForm.addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     // Check if passwords match
@@ -21,13 +21,19 @@ registrationForm.addEventListener('submit', function (event) {
         };
 
         // Send the registration request using the Fetch API
-        fetch('/auth/register', {
+        const response = await fetch('/auth/register', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(registrationData),
         })
+        
+        if (response.ok) {
+            document.location.replace('/dashboard');
+        } else {
+            alert(response.statusText);
+        }
     }
     this.reset();
 });

@@ -1,16 +1,20 @@
-document.getElementById('loginForm').addEventListener('submit', function (e) {
+document.getElementById('loginForm').addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
 
-    fetch('/auth/login', {
+    const response = await fetch('/auth/login', {
         method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
         body: JSON.stringify({ email, password }),
-    })
+        headers: { 'Content-Type': 'application/json' },
+    });
+
+    if (response.ok) {
+        document.location.replace('/dashboard');
+    } else {
+        alert(response.statusText);
+    }
 
     this.reset();
 });

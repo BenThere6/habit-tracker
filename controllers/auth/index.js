@@ -33,8 +33,7 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 return next(err);
             }
-            console.log('Successful login, redirecting to /dashboard.')
-            res.redirect('/dashboard');
+            res.status(200).send('OK');
             return;
         });
     });
@@ -73,8 +72,7 @@ router.post('/register', (req, res, next) => {
                             console.log('Error logging in new user.')
                             return next(err);
                         }
-                        console.log('Redirecting new user to dashboard.')
-                        res.redirect('/dashboard');
+                        res.status(200).send('OK');
                     });
                 })
                 .catch(err => {
