@@ -1,17 +1,19 @@
 const registrationForm = document.getElementById('registration-form');
 const passwordInput = document.getElementById('password');
 const confirmPasswordInput = document.getElementById('confirm-password');
-const passwordError = document.getElementById('password-error');
+const passwordError = document.getElementById('message');
 
 registrationForm.addEventListener('submit', async (event) => {
     event.preventDefault(); // Prevent the default form submission
 
     // Check if passwords match
     if (passwordInput.value !== confirmPasswordInput.value) {
-        passwordError.style.display = 'block';
+        passwordError.textContent = 'Passwords do not match';
+        passwordInput.value = '';
+        confirmPasswordInput.value = '';
     } else {
         // Passwords match, proceed with registration
-        passwordError.style.display = 'none';
+        passwordError.textContent = '';
 
         // Prepare the data to send
         const formData = new FormData(registrationForm);
@@ -29,11 +31,16 @@ registrationForm.addEventListener('submit', async (event) => {
             body: JSON.stringify(registrationData),
         })
         
-        if (response.ok) {
+        if (response.status === 400) {
+            return response.json().then(data => {
+                const errorMessage = data.error;
+                const errorMessageElement = document.getElementById('message');
+                errorMessageElement.textContent = errorMessage;
+                errorMessageElement.style.display = 'block';
+            });
+        } else if (response.ok) {
             document.location.replace('/dashboard');
-        } else {
-            alert(response.statusText);
-        }
+        } 
     }
-    this.reset();
+    // this.reset();
 });

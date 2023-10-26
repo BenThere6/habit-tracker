@@ -11,21 +11,19 @@ router.post('/login', (req, res, next) => {
     if (!email) {
         // Handle the case where email is not provided
         console.log('Email not provided.')
-        return res.redirect('/auth/login');
+        return res.status(400).json({ error: 'Email is required' });
     }
 
     // Use the User model to find the user by email
     User.findOne({ where: { email } }).then(user => {
         if (!user) {
             // User not found, handle this case
-            console.log('User not found.')
-            return res.redirect('/auth/login');
+            return res.status(400).json({ error: 'Email or password is incorrect' });
         }
 
         if (!user.checkPassword(password)) {
             // Password is incorrect, handle this case
-            console.log('Incorrect password.')
-            return res.redirect('/auth/login');
+            return res.status(400).json({ error: 'Email or password is incorrect' });
         }
 
         // Set up the user session after successful login
@@ -59,8 +57,9 @@ router.post('/register', (req, res, next) => {
     User.findOne({ where: { email } }).then(user => {
         if (user) {
             // Email is already in use, handle this case
-            console.log('User already exists.')
-            res.redirect('/auth/register');
+            return res.status(400).json({ error: 'Email is already in use' });
+        } else if (password.length < 8) {
+            return res.status(400).json({ error: 'Password must be at least 8 characters' })
         } else {
             // Create a new user
             User.create({ email, password })
