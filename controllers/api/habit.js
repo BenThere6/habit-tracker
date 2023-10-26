@@ -20,4 +20,18 @@ router.post('/add', async (req, res) => {
     }
 });
 
+router.get('/fetch', async (req, res) => {
+    try {
+        const userId = req.user.id;
+
+        const userHabits = await Habit.findAll({
+            where: { user_id: userId },
+        });
+
+        res.json(userHabits);
+    } catch (error) {
+        res.status(500).json({ error: 'Failed to fetch habits' });
+    }
+});
+
 module.exports = router;
