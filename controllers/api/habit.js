@@ -59,4 +59,31 @@ router.post('/markPerformed', async (req, res) => {
     }
 });
 
+router.get('/performancesToday/:habitId', async (req, res) => {
+    try {
+        const { habitId } = req.params;
+        const userId = req.user.id;
+
+        const currentDate = new Date();
+        const startOfToday = new Date(currentDate.setHours(0, 0, 0, 0));
+        const endOfToday = new Date(currentDate.setHours(23, 59, 59, 999));
+
+        const performancesToday = await Performances.count({
+            where: {
+                // user_id: userId,
+                habit_id: habitId,
+                // performed_date: {
+                //     [Op.between]: [startOfToday, endOfToday],
+                // },
+            },
+        });
+
+        console.log('success')
+
+        res.json({ success: true, performancesToday });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to fetch performances today' });
+    }
+});
+
 module.exports = router;

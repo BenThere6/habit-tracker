@@ -49,6 +49,10 @@ function displayHabits() {
                     const habitDiv = document.createElement('div');
                     habitDiv.textContent = habit.habit_name;
 
+                    const performancesTodayDiv = document.createElement('div');
+                    getPerformancesToday(habit.habit_id, performancesTodayDiv);
+                    habitDiv.appendChild(performancesTodayDiv);
+
                     const markPerformedButton = document.createElement('button');
                     markPerformedButton.textContent = 'Mark as Performed';
                     markPerformedButton.addEventListener('click', () => {
@@ -115,4 +119,19 @@ function markHabitAsPerformed(habitId) {
             console.error('Error:', error);
         });
     displayHabits();
+}
+
+function getPerformancesToday(habitId, divToUpdate) {
+    fetch(`/api/habit/performancesToday/${habitId}`)
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                divToUpdate.textContent = `Performed today: ${data.performancesToday}`;
+            } else {
+                console.error('Error:', data.error);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
