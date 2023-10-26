@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Habit } = require('../../models');
+const { Habit, Performances } = require('../../models');
 
 router.post('/add', async (req, res) => {
     try {
@@ -30,6 +30,32 @@ router.get('/fetch', async (req, res) => {
         res.json(userHabits);
     } catch (error) {
         res.status(500).json({ error: 'Failed to fetch habits' });
+    }
+});
+
+router.post('/markPerformed', async (req, res) => {
+    try {
+        const { habitId } = req.body;
+        const userId = req.user.id;
+
+        await Habit.update({ last_performed: new Date() }, {
+            where: {
+                habit_id: habitId,
+                user_id: userId,
+            },
+        });
+
+        // Create a new entry in the Performance model
+        await Performances.create({
+            user_id: userId,
+            habit_id: habitId,
+            performance_date: new Date(),
+        });
+
+        res.json({ success: true });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to create new performance log' });
+        console.log('Failed to create new performance log');
     }
 });
 

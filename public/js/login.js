@@ -21,6 +21,4 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         });
     } else if (response.ok) {
         document.location.replace('/dashboard');
-
-        // this.reset();
     }});

@@ -42,5 +42,4 @@ registrationForm.addEventListener('submit', async (event) => {
             document.location.replace('/dashboard');
         } 
     }
-    // this.reset();
 });

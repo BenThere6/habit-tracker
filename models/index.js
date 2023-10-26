@@ -18,4 +18,4 @@ User.hasMany(Habit, {
 Habit.belongsTo(User);
 Performances.belongsTo(User);
 
-module.exports = { sequelize, User, Habit };
+module.exports = { sequelize, User, Habit, Performances };
