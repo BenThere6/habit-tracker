@@ -34,7 +34,7 @@ router.post('/login', (req, res, next) => {
                 return next(err);
             }
             console.log('Successful login, redirecting to /dashboard.')
-            res.redirect(303, '/dashboard');
+            res.redirect('/dashboard');
             return;
         });
     });

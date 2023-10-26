@@ -3,15 +3,15 @@ const clog = (req, res, next) => {
     const fgWhite = '\x1b[37m'
     switch (req.method) {
       case 'GET': {
-        console.info(`📗 ${fgCyan}${req.method} request to ${req.path}${fgWhite} ${res.statusCode}`);
+        console.info(`📗 ${res.statusCode} ${fgCyan}${req.method} request to ${req.path}${fgWhite}`);
         break;
       }
       case 'POST': {
-        console.info(`📘 ${fgCyan}${req.method} request to ${req.path}${fgWhite} ${res.statusCode}`);
+        console.info(`📘 ${res.statusCode} ${fgCyan}${req.method} request to ${req.path}${fgWhite}`);
         break;
       }
       default:
-        console.log(`📙${fgCyan}${req.method} request to ${req.path}${fgWhite} ${res.statusCode}`);
+        console.log(`📙 ${res.statusCode} ${fgCyan}${req.method} request to ${req.path}${fgWhite}`);
     }
   
     next();
