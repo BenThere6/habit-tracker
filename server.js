@@ -23,6 +23,10 @@ app.use(flash());
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
 app.set('views', './views')
+app.use((req, res, next) => {
+    res.locals.authenticated = req.isAuthenticated();
+    next();
+});
 app.use(express.static('public'));
 app.use(controllers);
 
