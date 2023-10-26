@@ -44,19 +44,6 @@
                 },
                 body: JSON.stringify(registrationData),
             })
-                .then(response => response.json())
-                // .then(data => {
-                //     // Handle the registration response, e.g., redirect to the dashboard or show an error message
-                //     if (data.success) {
-                //         window.location.href = '/dashboard';
-                //     } else {
-                //         // Handle registration error
-                //         // You can display an error message here
-                //     }
-                // })
-                .catch(error => {
-                    console.error('Registration error:', error);
-                });
         }
         this.reset();
     });

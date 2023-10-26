@@ -23,7 +23,6 @@ router.post('/add', async (req, res) => {
 router.get('/fetch', async (req, res) => {
     try {
         const userId = req.user.id;
-
         const userHabits = await Habit.findAll({
             where: { user_id: userId },
         });

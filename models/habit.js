@@ -22,6 +22,9 @@ Habit.init(
       type: DataTypes.ENUM('good', 'bad'),
       allowNull: false,
     },
+    last_performed: {
+      type: DataTypes.DATE,
+    },
   },
   {
     sequelize,
