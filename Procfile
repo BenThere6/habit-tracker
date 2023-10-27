@@ -1,2 +1,2 @@
 web: npm start
-seed: node seed
+seed: node seed.js
