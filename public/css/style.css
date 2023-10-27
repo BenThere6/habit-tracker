@@ -1,0 +1,56 @@
+/* Apply styles to the main containers */
+.good-container,
+.bad-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+/* Style individual habit items */
+.habit-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+/* Style good habits */
+.good-habit {
+    background-color: #4CAF50; /* Green background for good habits */
+    color: #fff;
+}
+
+/* Style bad habits and their parent containers */
+.bad-habit-parent {
+    background-color: #F44336; /* Red background for bad habits */
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Style the button for marking performed */
+.habit-item button {
+    background-color: #3498db; /* Blue background for buttons */
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+/* Style days since last performed */
+.bad-habit-parent div {
+    margin-top: 5px;
+}
+
+/* Style the footer, adjust as needed */
+footer {
+    text-align: center;
+    background-color: #333;
+    color: #fff;
+    padding: 10px 0;
+}
