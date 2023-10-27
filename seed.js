@@ -21,5 +21,5 @@ async function markHabitAsPerformedOnPastDate(habitId, performedDate) {
 
 // Call the function with the habit ID and the past date you want to set
 
-// markHabitAsPerformedOnPastDate(6, '2023-10-25');
-// markHabitAsPerformedOnPastDate(7, '2023-10-25');
+markHabitAsPerformedOnPastDate(6, '2023-10-25');
+markHabitAsPerformedOnPastDate(7, '2023-10-25');

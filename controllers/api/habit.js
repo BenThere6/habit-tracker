@@ -1,5 +1,7 @@
 const router = require('express').Router();
+const moment = require('moment');
 const { Habit, Performances } = require('../../models');
+const { Op } = require('sequelize');
 
 router.post('/add', async (req, res) => {
     try {
@@ -68,21 +70,25 @@ router.get('/performancesToday/:habitId', async (req, res) => {
         const startOfToday = new Date(currentDate.setHours(0, 0, 0, 0));
         const endOfToday = new Date(currentDate.setHours(23, 59, 59, 999));
 
+        const startOfTodayFormatted = moment(startOfToday).format('YYYY-MM-DD HH:mm:ss');
+        const endOfTodayFormatted = moment(endOfToday).format('YYYY-MM-DD HH:mm:ss');
+
+console.log(startOfTodayFormatted)
+
         const performancesToday = await Performances.count({
             where: {
-                // user_id: userId,
+                user_id: userId,
                 habit_id: habitId,
-                // performed_date: {
-                //     [Op.between]: [startOfToday, endOfToday],
-                // },
+                performance_date: {
+                    [Op.between]: [startOfTodayFormatted, endOfTodayFormatted],
+                },
             },
         });
-
-        console.log('success')
 
         res.json({ success: true, performancesToday });
     } catch (error) {
         res.status(500).json({ success: false, error: 'Failed to fetch performances today' });
+        console.log(error)
     }
 });
 
