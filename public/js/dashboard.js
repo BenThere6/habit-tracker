@@ -1,4 +1,4 @@
-const { adjustedDate } = require('../../utils/getDate');
+let adjustedDate = getAdjustedDateDate();
 
 document.getElementById('habit-form').addEventListener('submit', function (e) {
     e.preventDefault();
@@ -76,7 +76,8 @@ function displayHabits() {
                             const lastPerformedDate = new Date(habit.last_performed);
                             const currentDate = new Date(adjustedDate);
                             const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
-                            const daysSinceLastPerformed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+                            daysSinceLastPerformed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
                             if (daysSinceLastPerformed === 0) {
                                 daysSinceLastPerformed = 'Last performed: Today';
@@ -139,4 +140,17 @@ function getPerformancesToday(habitId, divToUpdate) {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+function getAdjustedDateDate() {
+    const currentDateTime = new Date();
+    // Subtract 10 hours (10 * 60 minutes * 60 seconds * 1000 milliseconds)
+    const adjustedDateTime = new Date(currentDateTime - 10 * 60 * 60 * 1000);
+
+    // Get the date portion (yyyy-mm-dd)
+    const year = adjustedDateTime.getFullYear();
+    const month = String(adjustedDateTime.getMonth() + 1).padStart(2, '0'); // Add 1 to month since it's zero-based
+    const day = String(adjustedDateTime.getDate()).padStart(2, '0');
+
+    return `${year}-${month}-${day}`;
 }

@@ -1,5 +1,5 @@
 const router = require('express').Router();
-const { Habit, Performances } = require('../../models');
+const { sequelize, Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
 const { adjustedDate } = require('../../utils/getDate');
 
