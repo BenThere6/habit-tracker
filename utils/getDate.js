@@ -14,6 +14,4 @@ function getAdjustedDateDate() {
 
 var adjustedDate = getAdjustedDateDate();
 
-console.log(adjustedDate);
-
 module.exports = { adjustedDate };
