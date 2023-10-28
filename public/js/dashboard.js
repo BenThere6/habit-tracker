@@ -34,10 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     displayHabits();
 })
 
-function displayHabits() {
-    fetch('/api/habit/fetch')
-        .then(response => response.json())
-        .then(data => {
+async function displayHabits() {
+    try {
+        const response = await fetch('/api/habit/fetch');
+        if (response.ok) {
+            const data = await response.json();
+
             if (Array.isArray(data)) {
                 const habitContainer = document.getElementById('habit-container');
                 habitContainer.innerHTML = '';
@@ -46,63 +48,52 @@ function displayHabits() {
                 goodContainer.className = 'good-container';
                 badContainer.className = 'bad-container';
 
-                data.forEach(habit => {
+                for (const habit of data) {
                     const habitDiv = document.createElement('div');
                     habitDiv.textContent = habit.habit_name;
 
-                    const performancesTodayDiv = document.createElement('div');
-                    getPerformancesToday(habit.habit_id, performancesTodayDiv);
-                    habitDiv.appendChild(performancesTodayDiv);
-
-                    // const markPerformedButton = document.createElement('button');
-                    // markPerformedButton.textContent = 'Mark as Performed';
-                    // markPerformedButton.addEventListener('click', () => {
-                    //     markHabitAsPerformed(habit.habit_id);
-                    // });
-                    // habitDiv.appendChild(markPerformedButton);
+                    const numLabel = document.createElement('div');
+                    numLabel.className = 'num-label';
 
                     if (habit.habit_type === 'good') {
                         habitDiv.className = 'habit-item good-habit';
+                        numLabel.textContent = 'Current Streak';
+
+                        const streak = await getHabitStreak(habit.habit_id);
+
+                        const streakDiv = document.createElement('div');
+                        streakDiv.className = 'streak tile-num';
+                        streakDiv.textContent = streak;
+
+                        habitDiv.appendChild(streakDiv);
+                        habitDiv.appendChild(numLabel);
                         goodContainer.appendChild(habitDiv);
                     } else {
-                        const badHabitParentDiv = document.createElement('div');
-                        badHabitParentDiv.className = 'bad-habit-parent';
-
                         habitDiv.className = 'habit-item bad-habit';
+                        numLabel.textContent = 'Days Since';
 
-                        let daysSinceLastPerformed = 'Not performed yet';
+                        const lastPerformedDate = new Date(habit.last_performed);
+                        const currentDate = new Date(adjustedDate);
+                        const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
 
-                        if (habit.last_performed) {
-                            const lastPerformedDate = new Date(habit.last_performed);
-                            const currentDate = new Date(adjustedDate);
-                            const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
+                        const daysSinceDiv = document.createElement('div');
+                        daysSinceDiv.className = 'days-since tile-num';
+                        daysSinceDiv.textContent = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-                            daysSinceLastPerformed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-
-                            if (daysSinceLastPerformed === 0) {
-                                daysSinceLastPerformed = 'Last performed: Today';
-                            } else if (daysSinceLastPerformed === 1) {
-                                daysSinceLastPerformed = 'Last performed: Yesterday';
-                            } else {
-                                daysSinceLastPerformed = `Last performed: ${daysSinceLastPerformed} days ago`;
-                            }
-                        }
-
-                        // Create a child div for days since last performed
-                        const daysSinceLastPerformedDiv = document.createElement('div');
-                        daysSinceLastPerformedDiv.textContent = daysSinceLastPerformed;
-                        badHabitParentDiv.appendChild(habitDiv);
-                        badHabitParentDiv.appendChild(daysSinceLastPerformedDiv);
-                        badContainer.appendChild(badHabitParentDiv);
+                        habitDiv.appendChild(daysSinceDiv);
+                        habitDiv.appendChild(numLabel);
+                        badContainer.appendChild(habitDiv);
                     }
                     habitContainer.appendChild(goodContainer);
                     habitContainer.appendChild(badContainer);
-                });
+                }
             }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
+        } else {
+            console.error('Error:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }
 
 function markHabitAsPerformed(habitId) {
@@ -153,4 +144,25 @@ function getAdjustedDateDate() {
     const day = String(adjustedDateTime.getDate()).padStart(2, '0');
 
     return `${year}-${month}-${day}`;
+}
+
+async function getHabitStreak(habitId) {
+    try {
+        const response = await fetch(`/api/habit/streak/${habitId}`);
+        if (response.ok) {
+            const data = await response.json();
+            if (data.success) {
+                return data.streak;
+            } else {
+                console.error('Error:', data.error);
+                return 'Error';
+            }
+        } else {
+            console.error('Error:', response.statusText);
+            return 'Error';
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return 'Error';
+    }
 }

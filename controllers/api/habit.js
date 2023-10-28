@@ -99,4 +99,45 @@ router.get('/performancesToday/:habitId', async (req, res) => {
     }
 });
 
+router.get('/streak/:habitId', async (req, res) => {
+    try {
+        const { habitId } = req.params;
+        const userId = req.user.id;
+
+        // Get all performances for the habit, ordered by performance_date in descending order
+        const performances = await Performances.findAll({
+            where: {
+                user_id: userId,
+                habit_id: habitId,
+            },
+            order: [['performance_date', 'DESC']],
+        });
+
+        let streak = 0;
+
+        // Analyze the performance history to calculate the streak
+        for (let i = 0; i < performances.length; i++) {
+            // Calculate the time difference in days between the current performance and the next one
+            if (i < performances.length - 1) {
+                const currentPerformanceDate = performances[i].performance_date;
+                const nextPerformanceDate = performances[i + 1].performance_date;
+                const timeDifference = (nextPerformanceDate - currentPerformanceDate) / (1000 * 60 * 60 * 24);
+
+                // If the time difference is 1 day, increment the streak
+                if (timeDifference === 1) {
+                    streak++;
+                } else {
+                    // If there's a gap, break the streak
+                    break;
+                }
+            }
+        }
+
+        res.json({ success: true, streak });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to fetch streak' });
+        console.log(error);
+    }
+});
+
 module.exports = router;
