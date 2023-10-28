@@ -13,7 +13,6 @@ const clog = (req, res, next) => {
       default:
         console.log(`📙 ${res.statusCode} ${fgCyan}${req.method} request to ${req.path}${fgWhite}`);
     }
-  
     next();
   };
   

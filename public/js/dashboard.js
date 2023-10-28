@@ -1,3 +1,5 @@
+const { adjustedDate } = require('../../utils/getDate');
+
 document.getElementById('habit-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -25,7 +27,6 @@ document.getElementById('habit-form').addEventListener('submit', function (e) {
         .catch(error => {
             console.error('Error:', error);
         });
-
     this.reset();
 });
 
@@ -73,12 +74,16 @@ function displayHabits() {
 
                         if (habit.last_performed) {
                             const lastPerformedDate = new Date(habit.last_performed);
-                            const currentDate = new Date();
-                            daysSinceLastPerformed = `Last performed: ${Math.floor((currentDate - lastPerformedDate) / (1000 * 60 * 60 * 24))} days ago`;
-                            if (daysSinceLastPerformed === 'Last performed: 0 days ago') {
+                            const currentDate = new Date(adjustedDate);
+                            const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
+                            const daysSinceLastPerformed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+
+                            if (daysSinceLastPerformed === 0) {
                                 daysSinceLastPerformed = 'Last performed: Today';
-                            } else if (daysSinceLastPerformed === 'Last performed: 1 days ago') {
+                            } else if (daysSinceLastPerformed === 1) {
                                 daysSinceLastPerformed = 'Last performed: Yesterday';
+                            } else {
+                                daysSinceLastPerformed = `Last performed: ${daysSinceLastPerformed} days ago`;
                             }
                         }
 

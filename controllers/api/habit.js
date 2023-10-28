@@ -1,5 +1,4 @@
 const router = require('express').Router();
-const moment = require('moment');
 const { Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
 const { adjustedDate } = require('../../utils/getDate');
@@ -51,7 +50,7 @@ router.post('/markPerformed', async (req, res) => {
         const { habitId } = req.body;
         const userId = req.user.id;
 
-        await Habit.update({ last_performed: new Date() }, {
+        await Habit.update({ last_performed: adjustedDate }, {
             where: {
                 habit_id: habitId,
                 user_id: userId,
@@ -62,7 +61,7 @@ router.post('/markPerformed', async (req, res) => {
         await Performances.create({
             user_id: userId,
             habit_id: habitId,
-            performance_date: new Date(),
+            performance_date: adjustedDate,
         });
 
         res.json({ success: true });
@@ -77,25 +76,17 @@ router.get('/performancesToday/:habitId', async (req, res) => {
         const { habitId } = req.params;
         const userId = req.user.id;
 
-        const currentDate = new Date();
-        const startOfToday = new Date(currentDate.setHours(0, 0, 0, 0));
-        const endOfToday = new Date(currentDate.setHours(23, 59, 59, 999));
-
-        const startOfTodayFormatted = moment(startOfToday).format('YYYY-MM-DD HH:mm:ss');
-        const endOfTodayFormatted = moment(endOfToday).format('YYYY-MM-DD HH:mm:ss');
-
-console.log(startOfTodayFormatted)
-
         const performancesToday = await Performances.count({
             where: {
                 user_id: userId,
                 habit_id: habitId,
-                performance_date: {
-                    [Op.between]: [startOfTodayFormatted, endOfTodayFormatted],
-                },
-            },
+                [Op.and]: [
+                    sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), new Date(adjustedDate).getFullYear()),
+                    sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), new Date(adjustedDate).getMonth() + 1), // Months are zero-based
+                    sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), new Date(adjustedDate).getDate())
+                ]
+            }
         });
-
         res.json({ success: true, performancesToday });
     } catch (error) {
         res.status(500).json({ success: false, error: 'Failed to fetch performances today' });
