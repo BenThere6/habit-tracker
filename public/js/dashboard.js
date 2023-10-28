@@ -54,12 +54,12 @@ function displayHabits() {
                     getPerformancesToday(habit.habit_id, performancesTodayDiv);
                     habitDiv.appendChild(performancesTodayDiv);
 
-                    const markPerformedButton = document.createElement('button');
-                    markPerformedButton.textContent = 'Mark as Performed';
-                    markPerformedButton.addEventListener('click', () => {
-                        markHabitAsPerformed(habit.habit_id);
-                    });
-                    habitDiv.appendChild(markPerformedButton);
+                    // const markPerformedButton = document.createElement('button');
+                    // markPerformedButton.textContent = 'Mark as Performed';
+                    // markPerformedButton.addEventListener('click', () => {
+                    //     markHabitAsPerformed(habit.habit_id);
+                    // });
+                    // habitDiv.appendChild(markPerformedButton);
 
                     if (habit.habit_type === 'good') {
                         habitDiv.className = 'habit-item good-habit';

@@ -76,14 +76,19 @@ router.get('/performancesToday/:habitId', async (req, res) => {
         const { habitId } = req.params;
         const userId = req.user.id;
 
+        const dateParts = adjustedDate.split('-');
+        const year = parseInt(dateParts[0]);
+        const month = parseInt(dateParts[1]);
+        const day = parseInt(dateParts[2]);
+
         const performancesToday = await Performances.count({
             where: {
                 user_id: userId,
                 habit_id: habitId,
                 [Op.and]: [
-                    sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), new Date(adjustedDate).getFullYear()),
-                    sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), new Date(adjustedDate).getMonth() + 1), // Months are zero-based
-                    sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), new Date(adjustedDate).getDate())
+                    sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), year),
+                    sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), month),
+                    sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), day)
                 ]
             }
         });
