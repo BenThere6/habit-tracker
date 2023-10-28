@@ -8,7 +8,17 @@ router.post('/add', async (req, res) => {
         const { habitName, habitType } = req.body;
         const userId = req.user.id;
 
-        // Validate user input here, e.g., check for empty habitName
+        // Check if a habit with the same name already exists for the user
+        const existingHabit = await Habit.findOne({
+            where: {
+                user_id: userId,
+                habit_name: habitName,
+            },
+        });
+
+        if (existingHabit) {
+            return res.status(400).json({ success: false, error: 'Habit with the same name already exists' });
+        }
 
         const newHabit = await Habit.create({
             user_id: userId,
