@@ -2,7 +2,7 @@
 function getAdjustedDateDate() {
     const currentDateTime = new Date();
     // Subtract 10 hours (10 * 60 minutes * 60 seconds * 1000 milliseconds)
-    const adjustedDateTime = new Date(currentDateTime - 10 * 60 * 60 * 1000);
+    const adjustedDateTime = new Date(currentDateTime - 3 * 60 * 60 * 1000);
 
     // Get the date portion (yyyy-mm-dd)
     const year = adjustedDateTime.getFullYear();
