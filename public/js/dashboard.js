@@ -79,13 +79,6 @@ function displayHabits() {
 
                             daysSinceLastPerformed = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
 
-                            console.log('habit.last_performed: ' + habit.last_performed)
-                            console.log('adjusted date ' + adjustedDate)
-                            console.log('Days since last performed: ' + daysSinceLastPerformed)
-                            console.log('last performed date ' + lastPerformedDate)
-                            console.log('current Date ' + currentDate)
-                            console.log('time difference ' + timeDifference)
-
                             if (daysSinceLastPerformed === 0) {
                                 daysSinceLastPerformed = 'Last performed: Today';
                             } else if (daysSinceLastPerformed === 1) {
@@ -153,7 +146,6 @@ function getAdjustedDateDate() {
     const currentDateTime = new Date();
     // Subtract 10 hours (10 * 60 minutes * 60 seconds * 1000 milliseconds)
     const adjustedDateTime = new Date(currentDateTime - 3 * 60 * 60 * 1000);
-    // const adjustedDateTime = currentDateTime;
 
     // Get the date portion (yyyy-mm-dd)
     const year = adjustedDateTime.getFullYear();
