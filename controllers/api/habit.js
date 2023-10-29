@@ -3,35 +3,6 @@ const { sequelize, Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
 const { adjustedDate } = require('../../utils/getDate');
 
-router.get('/details/:habitId' , async (req, res) => {
-    try {
-        const { habitId } = req.params;
-
-        const habitDetails = await Habit.findOne({
-            where: {
-                habit_id: habitId,
-            },
-        });
-
-        if (!habitDetails) {
-            return res.status(404).json({ success: false, error: 'Habit not found' });
-        }
-        let formattedDate;
-        if (habitDetails.last_performed) {
-            var lastPerformedDate = new Date(habitDetails.last_performed)
-            const isoString = lastPerformedDate.toISOString();
-            formattedDate = isoString.split('T')[0];
-        } else {
-            formattedDate = 'N/A'
-        }
-        
-        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performed: formattedDate });
-    } catch (err) {
-        res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
-        console.log(err);
-    }
-})
-
 router.post('/add', async (req, res) => {
     try {
         const { habitName, habitType } = req.body;
@@ -74,9 +45,9 @@ router.get('/fetch', async (req, res) => {
     }
 });
 
-router.post('/markPerformed', async (req, res) => {
+router.post('/markPerformed/:habitId', async (req, res) => {
     try {
-        const { habitId } = req.body;
+        const { habitId } = req.params;
         const userId = req.user.id;
 
         await Habit.update({ last_performed: adjustedDate }, {
@@ -168,5 +139,34 @@ router.get('/streak/:habitId', async (req, res) => {
         console.log(error);
     }
 });
+
+router.get('/details/:habitId' , async (req, res) => {
+    try {
+        const { habitId } = req.params;
+
+        const habitDetails = await Habit.findOne({
+            where: {
+                habit_id: habitId,
+            },
+        });
+
+        if (!habitDetails) {
+            return res.status(404).json({ success: false, error: 'Habit not found' });
+        }
+        let formattedDate;
+        if (habitDetails.last_performed) {
+            var lastPerformedDate = new Date(habitDetails.last_performed)
+            const isoString = lastPerformedDate.toISOString();
+            formattedDate = isoString.split('T')[0];
+        } else {
+            formattedDate = 'N/A'
+        }
+        // res.render('habit-details', { habit: habitDetails })
+        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performed: formattedDate, habit_id: habitDetails.habit_id });
+    } catch (err) {
+        res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
+        console.log(err);
+    }
+})
 
 module.exports = router;
