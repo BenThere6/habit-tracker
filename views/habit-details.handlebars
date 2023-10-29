@@ -1,19 +1,6 @@
 <h1>{{habit_name}}</h1>
 <p>Habit Type: {{habit_type}}</p>
-<p id="habitId">Habit ID: {{habit_id}}</p>
+<p>Habit ID: <span id="habitId">{{habit_id}}</span></p>
 <p>Last Performed: {{last_performed}}</p>
 <button id="markPerformedButton">Mark as Performed</button>
-
-{{!-- <h1>{{habit.habit_name}}</h1>
-<p>Habit Type: {{habit.habit_type}}</p>
-<p id="habitId">{{habit.habit_id}}</p>
-<p>Last Performed: {{habit.last_performed}}</p>
-<button id="markPerformedButton">Mark as Performed</button> --}}
-
-{{!-- {{#with habit}}
-    <h1>{{habit_name}}</h1>
-    <p>Habit Type: {{habit_type}}</p>
-    <p id="habitId">{{habit_id}}</p>
-    <p>Last Performed: {{last_performed}}</p>
-{{/with}}
-<button id="markPerformedButton">Mark as Performed</button> --}}
+<script src="/js/habit-details.js"></script>

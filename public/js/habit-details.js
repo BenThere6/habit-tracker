@@ -4,7 +4,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Add the event listener to the "Mark as Performed" button
     document.getElementById('markPerformedButton').addEventListener('click', () => {
-        console.log("hoya")
         markHabitAsPerformed(habitId);
     });
 });
