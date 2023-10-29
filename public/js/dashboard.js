@@ -51,7 +51,16 @@ async function displayHabits() {
                 for (const habit of data) {
                     const habitDiv = document.createElement('div');
                     habitDiv.textContent = habit.habit_name;
-
+                    habitDiv.addEventListener('click', function () {
+                        try {
+                            document.location.replace(`/habit/details/${habit.habit_id}`);
+                            // fetch(`/habit/details/${habit.habit_id}`)
+                            // document.location.replace('/');
+                        } catch (err) {
+                            console.log(err);
+                        }
+                        
+                    })
                     const numLabel = document.createElement('div');
                     numLabel.className = 'num-label';
 
