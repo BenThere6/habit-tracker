@@ -3,6 +3,26 @@ const { sequelize, Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
 const { adjustedDate } = require('../../utils/getDate');
 
+router.get('/details/:habitId' , async (req, res) => {
+    try {
+        const { habitId } = req.params;
+
+        const habitDetails = await Habit.findOne({
+            where: {
+                habit_id: habitId,
+            },
+        });
+
+        if (!habitDetails) {
+            return res.status(404).json({ success: false, error: 'Habit not found' });
+        }
+        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performance: habitDetails.last_performance });
+    } catch (err) {
+        res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
+        console.log(err);
+    }
+})
+
 router.post('/add', async (req, res) => {
     try {
         const { habitName, habitType } = req.body;
@@ -139,31 +159,5 @@ router.get('/streak/:habitId', async (req, res) => {
         console.log(error);
     }
 });
-
-router.get('/details/:habitId', async (req, res) => {
-    try {
-        const { habitId } = req.params;
-        const userId = req.user.id;
-
-        console.log(habitId, userId)
-
-        const habitDetails = await Habit.findOne({
-            where: {
-                habit_id: habitId,
-                user_id: userId,
-            },
-        });
-
-        if (!habitDetails) {
-            return res.status(404).json({ success: false, error: 'Habit not found' });
-        }
-
-        res.render('habit-details', { habit: habitDetails });
-
-    } catch (err) {
-        res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
-        console.log(err);
-    }
-})
 
 module.exports = router;
