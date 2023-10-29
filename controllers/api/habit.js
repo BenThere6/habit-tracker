@@ -16,7 +16,16 @@ router.get('/details/:habitId' , async (req, res) => {
         if (!habitDetails) {
             return res.status(404).json({ success: false, error: 'Habit not found' });
         }
-        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performance: habitDetails.last_performance });
+        let formattedDate;
+        if (habitDetails.last_performed) {
+            var lastPerformedDate = new Date(habitDetails.last_performed)
+            const isoString = lastPerformedDate.toISOString();
+            formattedDate = isoString.split('T')[0];
+        } else {
+            formattedDate = 'N/A'
+        }
+        
+        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performed: formattedDate });
     } catch (err) {
         res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
         console.log(err);

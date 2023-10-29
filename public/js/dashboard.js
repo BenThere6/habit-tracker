@@ -53,7 +53,7 @@ async function displayHabits() {
                     habitDiv.textContent = habit.habit_name;
                     habitDiv.addEventListener('click', function () {
                         try {
-                            document.location.replace(`/habit/details/${habit.habit_id}`);
+                            document.location.replace(`/api/habit/details/${habit.habit_id}`);
                         } catch (err) {
                             console.log(err);
                         }
