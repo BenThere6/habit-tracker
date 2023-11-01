@@ -76,7 +76,7 @@ async function displayHabits() {
                         goodContainer.appendChild(habitDiv);
                     } else {
                         habitDiv.className = 'habit-item bad-habit';
-                        numLabel.textContent = 'Days Since';
+                        numLabel.textContent = 'Days Ago';
 
                         const lastPerformedDate = new Date(habit.last_performed);
                         const currentDate = new Date(adjustedDate);

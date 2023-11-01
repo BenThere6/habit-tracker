@@ -104,33 +104,73 @@ router.get('/streak/:habitId', async (req, res) => {
         const { habitId } = req.params;
         const userId = req.user.id;
 
-        // Get all performances for the habit, ordered by performance_date in descending order
-        const performances = await Performances.findAll({
+        // Get the current date and time in MST (Mountain Standard Time)
+        const currentDate = new Date();
+        currentDate.setHours(currentDate.getHours() - 7); // MST is UTC-7
+
+        // Initialize streak to 0
+        let streak = 0;
+
+        // Check if it's before 3 AM MST (end of day), and if so, treat it as the previous day
+        if (currentDate.getHours() < 3) {
+            currentDate.setDate(currentDate.getDate() - 1);
+        }
+
+        // Start with yesterday and go backward
+        for (let i = 1; ; i++) {
+            const dateToCheck = new Date(currentDate);
+            dateToCheck.setDate(currentDate.getDate() - i);
+
+            // Check if it's before 3 AM MST (end of day) for the date to check
+            if (dateToCheck.getHours() < 3) {
+                dateToCheck.setDate(dateToCheck.getDate() - 1);
+            }
+
+            const yearToCheck = dateToCheck.getFullYear();
+            const monthToCheck = dateToCheck.getMonth() + 1;
+            const dayToCheck = dateToCheck.getDate();
+
+            // Check if there's a performance on the date
+            const performance = await Performances.findOne({
+                where: {
+                    user_id: userId,
+                    habit_id: habitId,
+                    performance_date: {
+                        [Op.and]: [
+                            sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), yearToCheck),
+                            sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), monthToCheck),
+                            sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), dayToCheck),
+                        ]
+                    },
+                },
+            });
+
+            if (performance) {
+                // If a performance is found for the date, increment the streak
+                streak++;
+            } else {
+                // If there's no performance for a date, stop the loop
+                break;
+            }
+        }
+
+        // Update the streak for today (based on the current date)
+        const todayPerformance = await Performances.findOne({
             where: {
                 user_id: userId,
                 habit_id: habitId,
+                performance_date: {
+                    [Op.and]: [
+                        sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), currentDate.getFullYear()),
+                        sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), currentDate.getMonth() + 1),
+                        sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), currentDate.getDate()),
+                    ]
+                },
             },
-            order: [['performance_date', 'DESC']],
         });
 
-        let streak = 0;
-
-        // Analyze the performance history to calculate the streak
-        for (let i = 0; i < performances.length; i++) {
-            // Calculate the time difference in days between the current performance and the next one
-            if (i < performances.length - 1) {
-                const currentPerformanceDate = performances[i].performance_date;
-                const nextPerformanceDate = performances[i + 1].performance_date;
-                const timeDifference = (nextPerformanceDate - currentPerformanceDate) / (1000 * 60 * 60 * 24);
-
-                // If the time difference is 1 day, increment the streak
-                if (timeDifference === 1) {
-                    streak++;
-                } else {
-                    // If there's a gap, break the streak
-                    break;
-                }
-            }
+        if (todayPerformance) {
+            streak++;
         }
 
         res.json({ success: true, streak });
@@ -140,7 +180,8 @@ router.get('/streak/:habitId', async (req, res) => {
     }
 });
 
-router.get('/details/:habitId' , async (req, res) => {
+
+router.get('/details/:habitId', async (req, res) => {
     try {
         const { habitId } = req.params;
 
@@ -161,7 +202,6 @@ router.get('/details/:habitId' , async (req, res) => {
         } else {
             formattedDate = 'N/A'
         }
-        // res.render('habit-details', { habit: habitDetails })
         res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performed: formattedDate, habit_id: habitDetails.habit_id });
     } catch (err) {
         res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
@@ -169,4 +209,12 @@ router.get('/details/:habitId' , async (req, res) => {
     }
 })
 
+function resetTimeToMidnight(date) {
+    date.setHours(0, 0, 0, 0);
+    return date;
+}
+
 module.exports = router;
+
+// INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 9, '2023-10-30');
+// INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 9, '2023-10-29');
