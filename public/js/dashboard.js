@@ -85,6 +85,9 @@ async function displayHabits() {
                         const daysSinceDiv = document.createElement('div');
                         daysSinceDiv.className = 'days-since tile-num';
                         daysSinceDiv.textContent = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                        if (daysSinceDiv.textContent == 19661) {
+                            daysSinceDiv.textContent = 'N/A'
+                        }
 
                         habitDiv.appendChild(daysSinceDiv);
                         habitDiv.appendChild(numLabel);
