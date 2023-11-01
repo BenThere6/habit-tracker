@@ -53,6 +53,10 @@ nav li {
     color: #333;
 }
 
+.habit-item:hover, #markPerformedButton:hover {
+    cursor: pointer;
+}
+
 /* Style good habits */
 .good-habit {
     background-color: #4CAF50; /* Green background for good habits */
