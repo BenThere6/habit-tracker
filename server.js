@@ -3,7 +3,6 @@ const passport = require('passport');
 const LocalStrategy = require('passport-local').Strategy;
 const session = require('express-session');
 const flash = require('connect-flash');
-const { sendSMS } = require('./utils/sendSms');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const { User } = require('./models');

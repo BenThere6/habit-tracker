@@ -1,4 +1,4 @@
-const { Habit } = require('./models');
+const { Habit } = require('../models');
 
 async function markHabitAsPerformedOnPastDate(habitId, performedDate) {
     try {

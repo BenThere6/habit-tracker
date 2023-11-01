@@ -1,7 +1,9 @@
 const router = require('express').Router();
 const { sequelize, Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
-const { adjustedDate } = require('../../utils/getDate');
+const moment = require('moment-timezone');
+const userTimezone = 'America/Denver';
+// const { adjustedDate } = require('../../utils/getDate');
 
 router.post('/add', async (req, res) => {
     try {
@@ -50,7 +52,7 @@ router.post('/markPerformed/:habitId', async (req, res) => {
         const { habitId } = req.params;
         const userId = req.user.id;
 
-        await Habit.update({ last_performed: adjustedDate }, {
+        await Habit.update({ last_performed: new Date() }, {
             where: {
                 habit_id: habitId,
                 user_id: userId,
@@ -61,7 +63,7 @@ router.post('/markPerformed/:habitId', async (req, res) => {
         await Performances.create({
             user_id: userId,
             habit_id: habitId,
-            performance_date: adjustedDate,
+            performance_date: new Date(),
         });
 
         res.json({ success: true });
@@ -74,28 +76,31 @@ router.post('/markPerformed/:habitId', async (req, res) => {
 router.get('/performancesToday/:habitId', async (req, res) => {
     try {
         const { habitId } = req.params;
-        const userId = req.user.id;
 
-        const dateParts = adjustedDate.split('-');
-        const year = parseInt(dateParts[0]);
-        const month = parseInt(dateParts[1]);
-        const day = parseInt(dateParts[2]);
-
-        const performancesToday = await Performances.count({
+        // Get the performances for the habit and user
+        const performances = await Performances.findAll({
             where: {
-                user_id: userId,
                 habit_id: habitId,
-                [Op.and]: [
-                    sequelize.where(sequelize.fn('YEAR', sequelize.col('performance_date')), year),
-                    sequelize.where(sequelize.fn('MONTH', sequelize.col('performance_date')), month),
-                    sequelize.where(sequelize.fn('DAY', sequelize.col('performance_date')), day)
-                ]
+            },
+        });
+
+        let performancesToday = 0;
+
+        // Iterate through each performance and check if it was performed today after 3 AM in the user's time zone
+        performances.forEach((performance) => {
+            const performanceDate = moment(performance.performance_date).tz(userTimezone);
+            const currentDate = moment().tz(userTimezone);
+            const threeAMToday = currentDate.startOf('day').hour(3);
+
+            if (performanceDate.isSameOrAfter(threeAMToday)) {
+                performancesToday++;
             }
         });
+
         res.json({ success: true, performancesToday });
     } catch (error) {
         res.status(500).json({ success: false, error: 'Failed to fetch performances today' });
-        console.log(error)
+        console.log(error);
     }
 });
 
@@ -216,5 +221,5 @@ function resetTimeToMidnight(date) {
 
 module.exports = router;
 
-// INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 9, '2023-10-30');
+// INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-11-01 09:14:08');
 // INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 9, '2023-10-29');
