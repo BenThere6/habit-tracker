@@ -214,11 +214,6 @@ router.get('/details/:habitId', async (req, res) => {
     }
 })
 
-function resetTimeToMidnight(date) {
-    date.setHours(0, 0, 0, 0);
-    return date;
-}
-
 module.exports = router;
 
 // INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-11-01 09:14:08');
