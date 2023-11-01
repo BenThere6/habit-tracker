@@ -5,8 +5,19 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add the event listener to the "Mark as Performed" button
     document.getElementById('markPerformedButton').addEventListener('click', () => {
         markHabitAsPerformed(habitId);
+
+        const lastPerformedDate = document.querySelector('#lastPerformedDate');
+        lastPerformedDate.textContent = getCurrentDate();
     });
 });
+
+function getCurrentDate() {
+    const currentDate = new Date();
+    const year = currentDate.getFullYear();
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 to the month since it's zero-based
+    const day = currentDate.getDate().toString().padStart(2, '0');
+    return `${year}-${month}-${day}`;
+}
 
 function markHabitAsPerformed(habitId) {
     fetch(`/api/habit/markPerformed/${habitId}`, {
