@@ -1,10 +1,15 @@
-document.addEventListener('DOMContentLoaded', () => {
+const performancesTodayEl = document.getElementById('performancesToday');
+
+document.addEventListener('DOMContentLoaded', async () => {
     // Get the habitId from the HTML element, you may need to adjust the selector
     const habitId = document.getElementById('habitId').textContent; // Adjust this selector as needed
 
+    await updatePerformancesToday(habitId);
+
     // Add the event listener to the "Mark as Performed" button
-    document.getElementById('markPerformedButton').addEventListener('click', () => {
+    document.getElementById('markPerformedButton').addEventListener('click', async () => {
         markHabitAsPerformed(habitId);
+        await updatePerformancesToday(habitId);
 
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = getCurrentDate();
@@ -39,4 +44,28 @@ function markHabitAsPerformed(habitId) {
         .catch(error => {
             console.error('Error:', error);
         });
+}
+
+async function getPerformancesToday(habitId, divToUpdate) {
+    try {
+        const response = await fetch(`/api/habit/performancesToday/${habitId}`);
+        const data = await response.json();
+        if (data.success) {
+            // divToUpdate.textContent = `Performed today: ${data.performancesToday}`;
+            return data.performancesToday;
+        } else {
+            console.error('Error:', data.error);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
+
+async function updatePerformancesToday(habitId) {
+    try {
+        const performancesToday = await getPerformancesToday(habitId);
+        performancesTodayEl.textContent = `${performancesToday}`;
+    } catch (error) {
+        console.error('Error:', error);
+    }
 }

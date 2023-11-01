@@ -124,21 +124,6 @@ function markHabitAsPerformed(habitId) {
     displayHabits();
 }
 
-function getPerformancesToday(habitId, divToUpdate) {
-    fetch(`/api/habit/performancesToday/${habitId}`)
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                divToUpdate.textContent = `Performed today: ${data.performancesToday}`;
-            } else {
-                console.error('Error:', data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
 function getAdjustedDateDate() {
     const currentDateTime = new Date();
     // Subtract 10 hours (10 * 60 minutes * 60 seconds * 1000 milliseconds)

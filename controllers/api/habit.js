@@ -49,7 +49,6 @@ router.post('/markPerformed/:habitId', async (req, res) => {
     try {
         const { habitId } = req.params;
         const userId = req.user.id;
-        console.log(habitId, userId)
 
         await Habit.update({ last_performed: adjustedDate }, {
             where: {
