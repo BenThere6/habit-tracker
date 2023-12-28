@@ -1,6 +1,6 @@
 /* main */
 .page-container {
-    margin:0;
+    margin: 0;
     position: relative;
     min-height: 100vh;
 }
@@ -13,7 +13,7 @@
 
 nav {
     background-color: #333;
-    padding:3px 0;
+    padding: 3px 0;
 }
 
 nav ul {
@@ -55,7 +55,7 @@ nav li {
 .center-hor {
     display: flex;
     justify-content: center;
-    height:100%;
+    height: 100%;
 }
 
 .center-ver {
@@ -87,7 +87,8 @@ footer {
     text-align: center;
 }
 
-.auth-input, .submit-btn {
+.auth-input,
+.submit-btn {
     margin-top: 10px;
     height: 25px;
     width: 200px;
@@ -134,7 +135,8 @@ footer {
     color: #333;
 }
 
-.habit-item:hover, #markPerformedButton:hover {
+.habit-item:hover,
+#markPerformedButton:hover {
     cursor: pointer;
 }
 
@@ -163,4 +165,17 @@ footer {
 
 .bad-habit-parent div {
     margin-top: 5px;
+}
+
+@media screen and (max-width:738px) {
+    header {
+        padding: 0 10px 0 10px;
+        /* font-size: 40px; */
+    }
+}
+
+@media screen and (max-width:610px) {
+    header {
+        font-size: 40px;
+    }
 }
