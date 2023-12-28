@@ -56,7 +56,6 @@ nav li {
     display: flex;
     justify-content: center;
     height:100%;
-    /* background-color: green; */
 }
 
 .center-ver {
@@ -109,11 +108,57 @@ footer {
     border: 1px solid black;
     background-color: #bfe7c0;
     text-decoration: none;
-    /* font-weight: bold; */
     padding: 10px 15px;
     width: 100px;
-    /* height: 30px; */
     display: inline-block;
     padding: 5px 0 5px 0;
     margin: 10px;
+}
+
+/* Dashboard */
+.good-container,
+.bad-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.habit-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7f7f7;
+    color: #333;
+}
+
+.habit-item:hover, #markPerformedButton:hover {
+    cursor: pointer;
+}
+
+.good-habit {
+    background-color: #4CAF50;
+    color: #fff;
+}
+
+.bad-habit-parent {
+    background-color: #F44336;
+    color: #fff;
+    border: none;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.habit-item button {
+    background-color: #3498db;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.bad-habit-parent div {
+    margin-top: 5px;
 }

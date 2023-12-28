@@ -1,9 +1,13 @@
 <div class="center-hor">
-    <h1>{{habit_name}}</h1>
-    <p>Habit Type: {{habit_type}}</p>
-    <p>Habit ID: <span id="habitId">{{habit_id}}</span></p>
-    <p>Last Performed: <span id="lastPerformedDate">{{last_performed}}</span></p>
-    <p>Performances Today: <span id='performancesToday'>{{performances_today}}</span></p>
-    <button id="markPerformedButton">Mark as Performed</button>
+    <div class="center-ver">
+        <div>
+            <h1>{{habit_name}}</h1>
+            <p>Habit Type: {{habit_type}}</p>
+            <p>Habit ID: <span id="habitId">{{habit_id}}</span></p>
+            <p>Last Performed: <span id="lastPerformedDate">{{last_performed}}</span></p>
+            <p>Performances Today: <span id='performancesToday'>{{performances_today}}</span></p>
+            <button id="markPerformedButton">Mark as Performed</button>
+        </div>
+    </div>
 </div>
 <script src="/js/habit-details.js"></script>

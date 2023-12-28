@@ -79,7 +79,7 @@ async function displayHabits() {
                         numLabel.textContent = 'Days Ago';
 
                         const lastPerformedDate = new Date(habit.last_performed);
-                        const currentDate = new Date(adjustedDate);
+                        const currentDate = new Date();
                         const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
 
                         const daysSinceDiv = document.createElement('div');
