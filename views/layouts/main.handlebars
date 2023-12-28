@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,20 +8,21 @@
     <title>Habit Tracker</title>
     <link rel="stylesheet" href="/css/style.css">
 </head>
+
 <body>
-    <header>
-        <h1>Habit Tracker</h1>
-    </header>
     <nav>
+        <header>
+            <h1>Habit Tracker</h1>
+        </header>
         <ul>
             {{#if authenticated}}
-                <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="/contact">Contact</a></li>
-                <li><a href="/auth/logout">Logout</a></li>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/contact">Contact</a></li>
+            <li><a href="/auth/logout">Logout</a></li>
             {{else}}
-                <li><a href="/">Home</a></li>
-                <li><a href="/auth/login">Login</a></li>
-                <li><a href="/auth/register">Register</a></li>
+            <li><a href="/">Home</a></li>
+            <li><a href="/auth/login">Login</a></li>
+            <li><a href="/auth/register">Register</a></li>
             {{/if}}
         </ul>
     </nav>
