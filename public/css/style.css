@@ -1,3 +1,4 @@
+/* main */
 .page-container {
     margin:0;
     position: relative;
@@ -7,6 +8,7 @@
 .content-wrap {
     margin: 10px;
     padding-bottom: 2.5rem;
+    height: calc(100vh - 180px);
 }
 
 nav {
@@ -31,6 +33,7 @@ header {
     color: #fff;
     padding: 0 10vw 0 10vw;
     font-size: 60px;
+    height: 60px;
 }
 
 nav a {
@@ -49,11 +52,25 @@ nav li {
     margin-right: 10px;
 }
 
+.center-hor {
+    display: flex;
+    justify-content: center;
+    height:100%;
+    /* background-color: green; */
+}
+
+.center-ver {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 footer {
     position: absolute;
     bottom: 0;
     width: 100%;
-    height: 2.5rem;
+    height: 40px;
     text-align: center;
     background-color: #333;
     color: #fff;
@@ -61,4 +78,25 @@ footer {
     display: flex;
     flex-direction: column;
     justify-content: space-around;
+}
+
+/* auth box */
+.auth-container {
+    box-shadow: 0px 0px 20px 1px #acabab;
+    padding: 20px;
+    border-radius: 4px;
+    text-align: center;
+}
+
+input, button {
+    margin-top: 10px;
+    height: 25px;
+    width: 200px;
+}
+
+button {
+    margin: 20px 0 0 0;
+    border-radius: 30px;
+    border: 1px solid black;
+    background-color: #bfe7c0;
 }

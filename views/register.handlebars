@@ -1,15 +1,26 @@
-<h2>Please register</h2>
-<form id="registration-form">
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required>
-
-    <label for="confirm-password">Confirm Password:</label>
-    <input type="password" id="confirm-password" name="confirm-password" required>
-
-    <input type="submit" value="Register">
-</form>
-<div id="message" style="color: red;"></div>
+<div class="center-hor">
+    <div class="center-ver">
+        <div class="auth-container">
+            <h2>Register</h2>
+            <form id="registration-form">
+                <div>
+                    <label for="email"></label>
+                    <input type="email" id="email" name="email" placeholder="Email" required>
+                </div>
+                <div>
+                    <label for="password"></label>
+                    <input type="password" id="password" name="password" placeholder="Password" required>
+                </div>
+                <div>
+                    <label for="confirm-password"></label>
+                    <input type="password" id="confirm-password" name="confirm-password" placeholder="Confirm Password" required>
+                </div>
+                <div class="center-hor">
+                    <button type="submit">Register</button>
+                </div>
+            </form>
+            <div id="message" style="color: red;"></div>
+        </div>
+    </div>
+</div>
 <script src="/js/register.js"></script>
