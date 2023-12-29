@@ -58,15 +58,11 @@
     var pageContainer = document.querySelector('.content-wrap')
 
     menuIcon.addEventListener('click', function () {
-        if (popupMenu.style.display === 'none' || popupMenu.style.display === '') {
-            popupMenu.style.display = 'block';
-        } else {
-            popupMenu.style.display = 'none';
-        }
+        popupMenu.classList.toggle('active')
     });
 
     pageContainer.addEventListener('click', function () {
-        popupMenu.style.display = 'none';
+        popupMenu.classList.remove('active')
     })
 </script>
 
