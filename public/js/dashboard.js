@@ -41,10 +41,17 @@ async function displayHabits() {
             const data = await response.json();
 
             if (Array.isArray(data)) {
+                // let goodCount = 0;
+                // let badCount = 0;
+
                 const habitContainer = document.getElementById('habit-container');
                 habitContainer.innerHTML = '';
                 const goodContainer = document.createElement('div');
                 const badContainer = document.createElement('div');
+
+                goodContainer.classList.add('hide');
+                badContainer.classList.add('hide');
+
                 goodContainer.className = 'good-container auth-container';
                 badContainer.className = 'bad-container auth-container';
 
@@ -57,11 +64,14 @@ async function displayHabits() {
                         } catch (err) {
                             console.log(err);
                         }
-                    })
+                    });
                     const numLabel = document.createElement('div');
                     numLabel.className = 'num-label';
 
                     if (habit.habit_type === 'good') {
+                        // goodCount++;
+                        // goodContainer.classList.remove('hide');
+
                         habitDiv.className = 'habit-item good-habit';
                         numLabel.textContent = 'Current Streak';
 
@@ -75,6 +85,9 @@ async function displayHabits() {
                         habitDiv.appendChild(numLabel);
                         goodContainer.appendChild(habitDiv);
                     } else {
+                        // badCount++;
+                        // badContainer.classList.remove('hide');
+
                         habitDiv.className = 'habit-item bad-habit';
                         numLabel.textContent = 'Days Ago';
 
@@ -86,15 +99,49 @@ async function displayHabits() {
                         daysSinceDiv.className = 'days-since tile-num';
                         daysSinceDiv.textContent = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
                         if (daysSinceDiv.textContent == 19661) {
-                            daysSinceDiv.textContent = 'N/A'
+                            daysSinceDiv.textContent = 'N/A';
                         }
 
                         habitDiv.appendChild(daysSinceDiv);
                         habitDiv.appendChild(numLabel);
                         badContainer.appendChild(habitDiv);
                     }
-                    habitContainer.appendChild(goodContainer);
-                    habitContainer.appendChild(badContainer);
+                }
+
+                habitContainer.appendChild(goodContainer);
+                habitContainer.appendChild(badContainer);
+
+                // habitCount = goodCount + badCount;
+                // if (habitCount < 1) {
+                //     habitContainer.classList.add("hide");
+                // } else {
+                //     habitContainer.classList.remove("hide");
+                // }
+                // if (goodCount < 1) {
+                //     goodContainer.classList.add("hide");
+                // }
+                // if (badCount < 1) {
+                //     badContainer.classList.add("hide");
+                // }
+
+                if (goodContainer.childElementCount < 1) {
+                    goodContainer.classList.add("hide");
+                } else {
+                    goodContainer.style.display = 'flex';
+                }
+                
+                if (badContainer.childElementCount < 1) {
+                    badContainer.classList.add("hide");
+                } else {
+                    badContainer.style.display = 'flex';
+                }
+                
+                if (goodContainer.childElementCount + badContainer.childElementCount < 1) {
+                    habitContainer.classList.add("hide");
+                    // badContainer.classList.add('hide')
+                    // goodContainer.classList.add('hide')
+                } else {
+                    habitContainer.classList.remove("hide");
                 }
             }
         } else {
