@@ -45,8 +45,8 @@ async function displayHabits() {
                 habitContainer.innerHTML = '';
                 const goodContainer = document.createElement('div');
                 const badContainer = document.createElement('div');
-                goodContainer.className = 'good-container';
-                badContainer.className = 'bad-container';
+                goodContainer.className = 'good-container auth-container';
+                badContainer.className = 'bad-container auth-container';
 
                 for (const habit of data) {
                     const habitDiv = document.createElement('div');

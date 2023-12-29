@@ -170,12 +170,19 @@ footer {
 }
 
 /* Dashboard */
+#dashboard-container {
+    display: flex;
+    /* flex-direction: column; */
+    /* align-items: center; */
+    justify-content: space-around;
+}
+
 .good-container,
 .bad-container {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-top: 20px;
+    margin-bottom: 30px;
 }
 
 .habit-item {
@@ -216,6 +223,22 @@ footer {
 
 .bad-habit-parent div {
     margin-top: 5px;
+}
+
+.form-container {
+    width: 300px;
+    margin-left: 20px;
+    height: 250px;
+}
+
+#habit-form {
+    display:flex;
+    flex-direction: column;
+}
+
+.add-habit {
+    height: 25px;
+    margin: 10px 0 10px 0;
 }
 
 /* Contact Page */
@@ -259,6 +282,13 @@ footer {
     header {
         padding: 0 10px 0 10px;
     }
+    #dashboard-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    .form-container {
+        margin: 0;
+    }
 }
 
 @media screen and (max-width:623px) {
@@ -267,6 +297,12 @@ footer {
     }
     #menu-icon {
         display: flex;
+    }
+}
+
+@media screen and (max-width:360px) {
+    .form-container {
+        width: calc(100vw - 60px);
     }
 }
 
