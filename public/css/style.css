@@ -2,6 +2,19 @@
     display: none;
 }
 
+.center-hor {
+    display: flex;
+    justify-content: center;
+}
+
+.center-ver {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+}
+
 /* main */
 .page-container {
     margin: 0;
@@ -103,20 +116,6 @@ nav li {
     margin-right: 10px;
 }
 
-.center-hor {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-}
-
-.center-ver {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-}
-
 footer {
     position: absolute;
     bottom: 0;
@@ -137,6 +136,7 @@ footer {
     padding: 20px;
     border-radius: 4px;
     text-align: center;
+    max-width: 800px;
 }
 
 .auth-input,
@@ -216,6 +216,37 @@ footer {
 
 .bad-habit-parent div {
     margin-top: 5px;
+}
+
+/* Contact Page */
+#contact-form {
+    display: flex;
+    flex-direction: column;
+}
+
+#contact-message {
+    height: 25vh;
+}
+
+#name, #email, #password, #confirm-password, #contact-message {
+    width: 75vw;
+    max-width:790px;
+}
+
+.text-box {
+    border: 4px #969494 solid;
+    border-radius: 10px;
+    width: 90%;
+
+}
+
+.text-box > p {
+    text-align: start;
+    padding:0 18px 0 18px;
+}
+
+#bottom-message {
+    margin-top:15px;
 }
 
 @media screen and (max-width:891px) {

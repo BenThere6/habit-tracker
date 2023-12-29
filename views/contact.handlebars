@@ -1,13 +1,39 @@
-<h1>Contact Us</h1>
-<form action="/submit-message" method="post">
-    <label for="name">Name:</label>
-    <input type="text" id="name" name="name" required>
-
-    <label for="email">Email:</label>
-    <input type="email" id="email" name="email" required>
-
-    <label for="message">Message:</label>
-    <textarea id="message" name="message" rows="4" required></textarea>
-
-    <button type="submit">Submit</button>
-</form>
+<div class="center-hor">
+    <div class="auth-container">
+        <h1>Contact Us</h1>
+        <div class="center-hor">
+            <div class="text-box">
+                <p>We're thrilled to hear from you! Whether you have questions, feedback, or just want to say hello,
+                    feel
+                    free
+                    to drop us a message using the form below.</p>
+            </div>
+        </div>
+        <form id="contact-form" action="/submit-message" method="post">
+            <div>
+                <label for="name"></label>
+                <input class="auth-input" type="text" id="name" name="name" placeholder="Name" required>
+            </div>
+            <div>
+                <label for="email"></label>
+                <input class="auth-input" type="email" id="email" name="email" placeholder="Email" required>
+            </div>
+            <div>
+                <label for="contact-message"></label>
+                <textarea class="auth-input" id="contact-message" name="message" rows="4" placeholder="Message"
+                    required></textarea>
+            </div>
+            <div class="center-hor">
+                <button class="submit-btn" type="submit">Submit</button>
+            </div>
+        </form>
+        <div class="center-hor">
+            <div class="text-box" id="bottom-message">
+                <p>If you've encountered any issues, found bugs, or have suggestions for improvement, we genuinely
+                    appreciate
+                    your input. Your feedback helps us make our service better for you and others.</p>
+                <p>Thank you for reaching out!</p>
+            </div>
+        </div>
+    </div>
+</div>
