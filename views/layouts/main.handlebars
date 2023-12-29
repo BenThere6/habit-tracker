@@ -29,7 +29,7 @@
             </div>
         </ul>
     </nav>
-    <div id="popup-menu">
+    <div id="popup-menu" class="hide">
         <div>
             <ul id="menu-list">
             {{#if authenticated}}
@@ -59,10 +59,12 @@
 
     menuIcon.addEventListener('click', function () {
         popupMenu.classList.toggle('active')
+        popupMenu.classList.toggle('hide')
     });
 
     pageContainer.addEventListener('click', function () {
         popupMenu.classList.remove('active')
+        popupMenu.classList.add('hide')
     })
 </script>
 
