@@ -33,6 +33,10 @@ nav ul {
     justify-content: space-around;
 }
 
+#title {
+    padding-left:30px;
+}
+
 li {
     display: flex;
     flex-direction: column;
@@ -214,23 +218,29 @@ footer {
     margin-top: 5px;
 }
 
-@media screen and (max-width:788px) {
+@media screen and (max-width:891px) {
     header {
         font-size: 40px;
     }
 }
 
-@media screen and (max-width:738px) {
+@media screen and (max-width:755px) {
     header {
         padding: 0 10px 0 10px;
     }
 }
 
-@media screen and (max-width:540px) {
+@media screen and (max-width:623px) {
     .nav-links {
         display: none;
     }
     #menu-icon {
         display: flex;
+    }
+}
+
+@media screen and (max-width:311px) {
+    header {
+        font-size: 30px;
     }
 }
