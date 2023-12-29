@@ -6,9 +6,9 @@
 }
 
 .content-wrap {
-    margin: 10px;
-    padding-bottom: 2.5rem;
-    height: calc(100vh - 180px);
+    margin: 10px 10px 0 10px;
+    padding-bottom: 85px;
+    min-height: calc(100vh - 200px);
 }
 
 nav {
@@ -202,19 +202,19 @@ footer {
     margin-top: 5px;
 }
 
+@media screen and (max-width:788px) {
+    header {
+        font-size: 40px;
+    }
+}
+
 @media screen and (max-width:738px) {
     header {
         padding: 0 10px 0 10px;
     }
 }
 
-@media screen and (max-width:610px) {
-    header {
-        font-size: 40px;
-    }
-}
-
-@media screen and (max-width:500px) {
+@media screen and (max-width:540px) {
     .nav-links {
         display: none;
     }
