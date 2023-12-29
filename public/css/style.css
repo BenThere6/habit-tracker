@@ -37,13 +37,15 @@ li {
     top: 98px;
     z-index: 1000;
     background-color: #333;
-    text-align: end;
+    text-align: center;
     border-radius: 0 0 5px 5px;
 }
 
 .menu-links {
-    margin: 0 10px 10px 0;
-    padding-top: 10px;
+    margin: 0 30px 10px 10px;
+    padding: 20px 10px 10px 10px;
+    /* margin: 0; */
+    /* padding-top: 10px; */
     border-top: rgb(152, 152, 152) solid .4px;
 }
 
@@ -142,7 +144,6 @@ footer {
     color: white;
     margin: 20px 0 0 0;
     border-radius: 30px;
-    /* border: 1px solid black; */
     background-color: #4CAF50;
     text-decoration: none;
     padding: 10px 15px;
@@ -204,7 +205,6 @@ footer {
 @media screen and (max-width:738px) {
     header {
         padding: 0 10px 0 10px;
-        /* font-size: 40px; */
     }
 }
 
