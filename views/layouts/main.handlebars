@@ -55,14 +55,19 @@
 <script>
     var menuIcon = document.getElementById('menu-icon');
     var popupMenu = document.getElementById('popup-menu');
+    var pageContainer = document.querySelector('.content-wrap')
 
     menuIcon.addEventListener('click', function () {
         if (popupMenu.style.display === 'none' || popupMenu.style.display === '') {
             popupMenu.style.display = 'block';
         } else {
-            popupMenu.style.display = 'none'
+            popupMenu.style.display = 'none';
         }
     });
+
+    pageContainer.addEventListener('click', function () {
+        popupMenu.style.display = 'none';
+    })
 </script>
 
 </html>
