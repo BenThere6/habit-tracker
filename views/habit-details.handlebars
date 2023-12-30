@@ -1,11 +1,13 @@
+<img id="back-button" src="/assets/back-black.png" alt="back button">
 <div class="center-hor">
-    <div>
+    <div class="auth-container details-container">
+        <img id='delete-btn' src="/assets/trash-bin.png" alt="trash-bin">
         <h1>{{habit_name}}</h1>
         <p>Habit Type: {{habit_type}}</p>
-        <p>Habit ID: <span id="habitId">{{habit_id}}</span></p>
         <p>Last Performed: <span id="lastPerformedDate">{{last_performed}}</span></p>
         <p>Performances Today: <span id='performancesToday'>{{performances_today}}</span></p>
-        <button id="markPerformedButton">Mark as Performed</button>
+        <button class="submit-btn" id="markPerformedButton">Mark as Performed</button>
+        <div id="habit-id-el">ID: <span id="habitId">{{habit_id}}</span></div>
     </div>
 </div>
 <script src="/js/habit-details.js"></script>

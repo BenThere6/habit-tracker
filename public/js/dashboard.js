@@ -122,17 +122,15 @@ async function displayHabits() {
                 } else {
                     goodCard.style.display = 'flex';
                 }
-                
+
                 if (badContainer.childElementCount < 1) {
                     badCard.classList.add("hide");
                 } else {
                     badCard.style.display = 'flex';
                 }
-                
+
                 if (goodContainer.childElementCount + badContainer.childElementCount < 1) {
                     habitContainer.classList.add("hide");
-                    // badContainer.classList.add('hide')
-                    // goodContainer.classList.add('hide')
                 } else {
                     habitContainer.classList.remove("hide");
                 }

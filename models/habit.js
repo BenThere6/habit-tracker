@@ -1,7 +1,26 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
 
-class Habit extends Model {}
+class Habit extends Model {
+  static async deleteHabitById(habitId) {
+    try {
+      const deletedHabit = await Habit.destroy({
+        where: {
+          habit_id: habitId,
+        },
+      });
+
+      if (deletedHabit === 1) {
+        return { success: true, message: 'Habit deleted successfully' };
+      } else {
+        return { success: false, error: 'Habit not found' };
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      return { success: false, error: 'Internal server error' };
+    }
+  }
+}
 
 Habit.init(
   {

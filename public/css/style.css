@@ -29,6 +29,7 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    position:relative;
 }
 
 nav {
@@ -190,7 +191,6 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    /* margin-bottom: 30px; */
     justify-content: center;
 }
 
@@ -233,7 +233,6 @@ footer {
 
 .form-container {
     width: 300px;
-    /* margin-left: 20px; */
     height: 250px;
 }
 
@@ -247,6 +246,43 @@ footer {
     margin: 10px 0 10px 0;
 }
 
+/* Habit Details */
+.details-container {
+    position: relative;
+}
+
+#habit-id-el {
+    position: absolute;
+    top:5px;
+    left:5px;
+}
+
+#back-button {
+    height: 40px;
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#back-button:hover {
+    cursor: pointer;
+    transform: scale(1.2);
+}
+
+#delete-btn {
+    height: 20px;
+    position: absolute;
+    top:10px;
+    right:10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+#delete-btn:hover {
+    cursor: pointer;
+    transform: scale(1.4);
+}
+
 /* Contact Page */
 #contact-form {
     display: flex;
@@ -257,16 +293,14 @@ footer {
     height: 25vh;
 }
 
-#name, #email, #password, #confirm-password, #contact-message {
+#name, #email, #password, #confirm-password, #contact-message, .text-box {
     width: 75vw;
-    max-width:790px;
+    max-width:400px;
 }
 
 .text-box {
     border: 4px #969494 solid;
     border-radius: 15px;
-    width: 75vw;;
-    max-width:800px;
 }
 
 .text-box > p {
@@ -276,6 +310,11 @@ footer {
 
 #bottom-message {
     margin-top:15px;
+}
+
+/* Page Not Found */
+#not-found-img {
+    height: 400px;
 }
 
 @media screen and (max-width:892px) {
@@ -301,6 +340,9 @@ footer {
     li {
         font-size: smaller;
     }
+    #not-found-img {
+        height: 200px;
+    }
 }
 
 @media screen and (max-width:623px) {
@@ -321,5 +363,8 @@ footer {
 @media screen and (max-width:333px) {
     header {
         font-size: 30px;
+    }
+    #not-found-img {
+        height: 150px;
     }
 }

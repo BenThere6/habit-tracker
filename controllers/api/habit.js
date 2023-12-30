@@ -171,6 +171,25 @@ router.get('/details/:habitId', async (req, res) => {
     }
 })
 
+router.post('/delete/:habitId', async (req, res) => {
+    const habitId = req.params.habitId;
+  
+    try {
+      const result = await Habit.deleteHabitById(habitId);
+  
+      if (result.success) {
+        // Habit deleted successfully
+        res.status(200).json({ success: true, message: result.message });
+      } else {
+        // Handle error cases
+        res.status(404).json({ success: false, error: result.error });
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ success: false, error: 'Internal server error' });
+    }
+  });
+
 module.exports = router;
 
 /*

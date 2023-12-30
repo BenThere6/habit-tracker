@@ -1,12 +1,10 @@
 const performancesTodayEl = document.getElementById('performancesToday');
 
 document.addEventListener('DOMContentLoaded', async () => {
-    // Get the habitId from the HTML element, you may need to adjust the selector
-    const habitId = document.getElementById('habitId').textContent; // Adjust this selector as needed
+    const habitId = document.getElementById('habitId').textContent;
 
     await updatePerformancesToday(habitId);
 
-    // Add the event listener to the "Mark as Performed" button
     document.getElementById('markPerformedButton').addEventListener('click', async () => {
         markHabitAsPerformed(habitId);
         await updatePerformancesToday(habitId);
@@ -16,10 +14,69 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+const backButton = document.getElementById('back-button');
+backButton.addEventListener('click', function() {
+    document.location.replace('/dashboard');
+})
+
+const deleteButton = document.getElementById('delete-btn');
+deleteButton.addEventListener('click', deleteCurrentHabit);
+
+async function deleteCurrentHabit() {
+    const habitId = getHabitIdFromURL();
+    if (habitId) {
+        try {
+            const response = await fetch(`/api/habit/delete/${habitId}`, {
+                method: 'post',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+            });
+
+            console.log('Response status:', response.status);
+            console.log('Response headers:', response.headers);
+
+            // Check if the content type is JSON
+            const contentType = response.headers.get('Content-Type');
+            if (contentType && contentType.includes('application/json')) {
+                const responseData = await response.json();
+                console.log('Response data:', responseData);
+
+                if (response.ok) {
+                    if (responseData.success) {
+                        console.log('Habit deleted successfully:', habitId);
+                        window.location.replace('/dashboard');
+                    } else {
+                        console.error('Error:', responseData.error);
+                    }
+                } else {
+                    console.error('Error:', response.statusText);
+                }
+            } else {
+                // Handle non-JSON content (possibly HTML or error page)
+                const responseText = await response.text();
+                console.error('Non-JSON response:', responseText);
+                // You might want to redirect or display an error message here
+            }
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    } else {
+        console.error('Error: Unable to determine habit ID');
+    }
+}
+
+function getHabitIdFromURL() {
+    // Implement this function to extract the habit ID from the current URL
+    // Example: /api/habit/details/123
+    const urlParts = window.location.pathname.split('/');
+    return urlParts[urlParts.length - 1];
+}
+
 function getCurrentDate() {
     const currentDate = new Date();
     const year = currentDate.getFullYear();
-    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0'); // Adding 1 to the month since it's zero-based
+    const month = (currentDate.getMonth() + 1).toString().padStart(2, '0');
     const day = currentDate.getDate().toString().padStart(2, '0');
     return `${year}-${month}-${day}`;
 }
@@ -51,7 +108,6 @@ async function getPerformancesToday(habitId, divToUpdate) {
         const response = await fetch(`/api/habit/performancesToday/${habitId}`);
         const data = await response.json();
         if (data.success) {
-            // divToUpdate.textContent = `Performed today: ${data.performancesToday}`;
             return data.performancesToday;
         } else {
             console.error('Error:', data.error);
