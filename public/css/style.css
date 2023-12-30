@@ -138,7 +138,7 @@ footer {
     padding: 20px;
     border-radius: 4px;
     text-align: center;
-    max-width: 800px;
+    max-width: 1400px;
 }
 
 .auth-input,
@@ -174,16 +174,28 @@ footer {
 /* Dashboard */
 #dashboard-container {
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.bad-card, .good-card {
+    margin-bottom: 30px;
+    flex-direction: column;
 }
 
 .good-container,
 .bad-container {
-    /* display: flex; */
+    display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    margin-bottom: 30px;
+    /* margin-bottom: 30px; */
     justify-content: center;
+}
+
+.habit-title {
+    padding-bottom:15px;
 }
 
 .habit-item {
@@ -192,6 +204,8 @@ footer {
     border-radius: 5px;
     background-color: #f7f7f7;
     color: #333;
+    width:130px;
+    height:130px;
 }
 
 .habit-item:hover,
@@ -202,15 +216,6 @@ footer {
 .good-habit {
     background-color: #4CAF50;
     color: #fff;
-}
-
-.bad-habit-parent {
-    background-color: #F44336;
-    color: #fff;
-    border: none;
-    padding: 5px;
-    border-radius: 5px;
-    margin-bottom: 10px;
 }
 
 .habit-item button {
@@ -228,7 +233,7 @@ footer {
 
 .form-container {
     width: 300px;
-    margin-left: 20px;
+    /* margin-left: 20px; */
     height: 250px;
 }
 
@@ -261,7 +266,7 @@ footer {
     border: 4px #969494 solid;
     border-radius: 15px;
     width: 75vw;;
-
+    max-width:800px;
 }
 
 .text-box > p {
@@ -283,10 +288,10 @@ footer {
     header {
         padding: 0 10px 0 10px;
     }
-    #dashboard-container {
+    /* #dashboard-container {
         flex-direction: column;
         align-items: center;
-    }
+    } */
     .form-container {
         margin: 0;
     }

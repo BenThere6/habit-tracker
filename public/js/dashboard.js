@@ -16,11 +16,9 @@ document.getElementById('habit-form').addEventListener('submit', function (e) {
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // Handle successful habit creation, e.g., update the UI
                 displayHabits();
                 console.log('New habit created:', data.habit);
             } else {
-                // Handle errors, e.g., display an error message
                 console.error('Error:', data.error);
             }
         })
@@ -41,8 +39,6 @@ async function displayHabits() {
             const data = await response.json();
 
             if (Array.isArray(data)) {
-                // let goodCount = 0;
-                // let badCount = 0;
 
                 const habitContainer = document.getElementById('habit-container');
                 habitContainer.innerHTML = '';
@@ -52,8 +48,8 @@ async function displayHabits() {
                 goodContainer.classList.add('hide');
                 badContainer.classList.add('hide');
 
-                goodContainer.className = 'good-container auth-container';
-                badContainer.className = 'bad-container auth-container';
+                goodContainer.className = 'good-container';
+                badContainer.className = 'bad-container';
 
                 for (const habit of data) {
                     const habitDiv = document.createElement('div');
@@ -69,9 +65,6 @@ async function displayHabits() {
                     numLabel.className = 'num-label';
 
                     if (habit.habit_type === 'good') {
-                        // goodCount++;
-                        // goodContainer.classList.remove('hide');
-
                         habitDiv.className = 'habit-item good-habit';
                         numLabel.textContent = 'Current Streak';
 
@@ -85,9 +78,6 @@ async function displayHabits() {
                         habitDiv.appendChild(numLabel);
                         goodContainer.appendChild(habitDiv);
                     } else {
-                        // badCount++;
-                        // badContainer.classList.remove('hide');
-
                         habitDiv.className = 'habit-item bad-habit';
                         numLabel.textContent = 'Days Ago';
 
@@ -108,32 +98,35 @@ async function displayHabits() {
                     }
                 }
 
-                habitContainer.appendChild(goodContainer);
-                habitContainer.appendChild(badContainer);
+                const goodCard = document.createElement('div');
+                const badCard = document.createElement('div');
+                goodCard.className = 'good-card auth-container';
+                badCard.className = 'bad-card auth-container';
 
-                // habitCount = goodCount + badCount;
-                // if (habitCount < 1) {
-                //     habitContainer.classList.add("hide");
-                // } else {
-                //     habitContainer.classList.remove("hide");
-                // }
-                // if (goodCount < 1) {
-                //     goodContainer.classList.add("hide");
-                // }
-                // if (badCount < 1) {
-                //     badContainer.classList.add("hide");
-                // }
+                const goodTitle = document.createElement('h2');
+                const badTitle = document.createElement('h2');
+                badTitle.className = 'bad-title habit-title';
+                goodTitle.className = 'good-title habit-title';
+                goodTitle.textContent = "Good Habits";
+                badTitle.textContent = "Bad Habits";
+
+                goodCard.appendChild(goodTitle);
+                badCard.appendChild(badTitle);
+                goodCard.appendChild(goodContainer);
+                badCard.appendChild(badContainer);
+                habitContainer.appendChild(goodCard);
+                habitContainer.appendChild(badCard);
 
                 if (goodContainer.childElementCount < 1) {
-                    goodContainer.classList.add("hide");
+                    goodCard.classList.add("hide");
                 } else {
-                    goodContainer.style.display = 'flex';
+                    goodCard.style.display = 'flex';
                 }
                 
                 if (badContainer.childElementCount < 1) {
-                    badContainer.classList.add("hide");
+                    badCard.classList.add("hide");
                 } else {
-                    badContainer.style.display = 'flex';
+                    badCard.style.display = 'flex';
                 }
                 
                 if (goodContainer.childElementCount + badContainer.childElementCount < 1) {
