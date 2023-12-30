@@ -1,3 +1,4 @@
+<div id="success-message" class="hide"></div>
 <div class="center-hor">
     <div class="auth-container">
         <h1>Contact Us</h1>
@@ -9,7 +10,7 @@
                     to drop us a message using the form below.</p>
             </div>
         </div>
-        <form id="contact-form" action="/submit-message" method="post">
+        <form id="contact-form">
             <div>
                 <label for="name"></label>
                 <input class="auth-input" type="text" id="name" name="name" placeholder="Name" required>
@@ -37,3 +38,41 @@
         </div>
     </div>
 </div>
+<script>
+    document.getElementById('contact-form').addEventListener('submit', async function (event) {
+    event.preventDefault();
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const message = document.getElementById('contact-message').value;
+
+    try {
+        const response = await fetch('/submit-message', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, message }),
+        });
+
+        if (response.ok) {
+            const data = await response.json();
+            console.log(data.message);
+
+            // Display success message
+            const successMessage = document.getElementById('success-message');
+            successMessage.textContent = data.message;
+            successMessage.classList.remove('hide');
+
+            // Optionally, you can redirect the user after a delay
+            //setTimeout(() => {
+            //    window.location.href = '/'; // Replace with your desired path
+            //}, 3000);
+        } else {
+            console.error('Error submitting form:', response.statusText);
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+});
+</script>
