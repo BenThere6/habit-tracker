@@ -158,11 +158,13 @@ footer {
     color: white;
 }
 
-.submit-btn:active {
+.submit-btn:active,
+.auth-btn:active {
     background-color: #37823a;
 }
 
-.submit-btn:hover {
+.submit-btn:hover,
+.auth-btn:hover {
     cursor: pointer;
 }
 
@@ -319,6 +321,24 @@ footer {
 
 #bottom-message {
     margin-top:15px;
+}
+
+#success-message {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    width:100%;
+    position:fixed;
+    top:0;
+    right:0;
+    font-size: 30px;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    z-index: 1005;
+}
+
+#success-message.show {
+    opacity: 1;
 }
 
 /* Page Not Found */
