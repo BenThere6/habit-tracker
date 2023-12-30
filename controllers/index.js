@@ -11,7 +11,7 @@ router.post('/submit-message', async (req, res) => {
     const { name, email, message } = req.body;
 
     try {
-        await sendEmail(process.env.EMAIL, 'New Contact Form Submission', `Name: ${name}\nEmail: ${email}\nMessage: ${message}`);
+        await sendEmail(process.env.EMAIL, 'New Contact Form Submission', `Name: ${name}\nEmail: ${email}\nMessage: \n${message}`);
         console.log('Email sent successfully');
         res.json({ success: true, message: 'Message sent successfully' });
     } catch (error) {
@@ -19,10 +19,6 @@ router.post('/submit-message', async (req, res) => {
         res.status(500).json({ success: false, error: 'Internal server error' });
     }
 });
-
-// router.get('/submit-message', (req, res) => {
-//     res.render('contact')
-// })
 
 router.use('/', homeRoutes);
 router.use((req,res) => {res.render('page-not-found')})
