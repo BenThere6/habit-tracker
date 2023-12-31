@@ -213,8 +213,8 @@ footer {
     padding: 10px;
     border: 1px solid #ccc;
     border-radius: 20px;
-    background-color: #f7f7f7;
-    color: #333;
+    /* background-color: #f7f7f7; */
+    /* color: #333; */
     width:130px;
     height:130px;
     display:flex;
@@ -230,6 +230,11 @@ footer {
 .good-habit {
     background-color: #4CAF50;
     color: #fff;
+}
+
+.bad-habit {
+    color: #fff;
+    background-color: #E53935;
 }
 
 .habit-item button {

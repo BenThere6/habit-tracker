@@ -164,7 +164,7 @@ async function createHabitTile(habit) {
         habitDiv.appendChild(numLabel);
     } else {
         habitDiv.className = 'habit-item bad-habit';
-        numLabel.textContent = 'Days Ago';
+        numLabel.textContent = 'Days Without';
 
         const lastPerformedDate = new Date(habit.last_performed);
         const currentDate = new Date();
