@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display|Rubik+Doodle+Shadow&display=swap">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -33,17 +34,17 @@
     <div id="popup-menu" class="hide">
         <div>
             <ul id="menu-list">
-            {{#if authenticated}}
-            <li class="menu-links"><a href="/dashboard">Dashboard</a></li>
-            <li class="menu-links"><a href="/contact">Contact</a></li>
-            <li class="menu-links"><a href="/auth/logout">Logout</a></li>
-            {{else}}
-            <li class="menu-links"><a href="/">Home</a></li>
-            <li class="menu-links"><a href="/auth/login">Login</a></li>
-            <li class="menu-links"><a href="/auth/register">Register</a></li>
-            <li class="menu-links"><a href="/contact">Contact</a></li>
-            {{/if}}
-        </ul>
+                {{#if authenticated}}
+                <li class="menu-links"><a href="/dashboard">Dashboard</a></li>
+                <li class="menu-links"><a href="/contact">Contact</a></li>
+                <li class="menu-links"><a href="/auth/logout">Logout</a></li>
+                {{else}}
+                <li class="menu-links"><a href="/">Home</a></li>
+                <li class="menu-links"><a href="/auth/login">Login</a></li>
+                <li class="menu-links"><a href="/auth/register">Register</a></li>
+                <li class="menu-links"><a href="/contact">Contact</a></li>
+                {{/if}}
+            </ul>
         </div>
     </div>
     <div class="content-wrap">
@@ -52,22 +53,24 @@
     <footer>
         <div>&copy; 2023 Habit Tracker</div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            var menuIcon = document.getElementById('menu-icon');
+            var popupMenu = document.getElementById('popup-menu');
+            var pageContainer = document.querySelector('.content-wrap');
+
+            menuIcon.addEventListener('click', function () {
+                popupMenu.classList.toggle('active');
+                popupMenu.classList.toggle('hide');
+            });
+
+            pageContainer.addEventListener('click', function () {
+                popupMenu.classList.remove('active');
+                popupMenu.classList.add('hide');
+            });
+        });
+    </script>
 </body>
-
-<script>
-    var menuIcon = document.getElementById('menu-icon');
-    var popupMenu = document.getElementById('popup-menu');
-    var pageContainer = document.querySelector('.content-wrap')
-
-    menuIcon.addEventListener('click', function () {
-        popupMenu.classList.toggle('active')
-        popupMenu.classList.toggle('hide')
-    });
-
-    pageContainer.addEventListener('click', function () {
-        popupMenu.classList.remove('active')
-        popupMenu.classList.add('hide')
-    })
-</script>
 
 </html>

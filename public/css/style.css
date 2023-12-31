@@ -191,7 +191,8 @@ footer {
 
 }
 
-.bad-card, .good-card {
+.bad-card, 
+.good-card {
     margin-bottom: 30px;
     flex-direction: column;
 }
@@ -211,11 +212,14 @@ footer {
 .habit-item {
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #f7f7f7;
     color: #333;
     width:130px;
     height:130px;
+    display:flex;
+    flex-direction: column;
+    position: relative;
 }
 
 .habit-item:hover,
@@ -239,6 +243,45 @@ footer {
 
 .bad-habit-parent div {
     margin-top: 5px;
+}
+
+.habit-name {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 100%;
+    text-align: center;
+    /* color: #333; */
+    font-family: 'DM Serif Display';
+    font-size: 25px;
+    text-shadow: 0 0 3px #333, 0 0 5px #000000;
+}
+
+.tile-num {
+    color: #333;
+    font-size: 120px;
+    position: absolute;
+    top: 9px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Rubik Doodle Shadow';
+}
+
+.num-label {
+    position: absolute;
+    bottom: 0px;
+    padding-bottom: 2px;
+    left:0;
+    width: 100%;
+    text-align: center;
+    font-size: 10px;
+    background-color: rgb(55, 55, 55);
+    border-radius: 0 0 20px 20px;
 }
 
 .form-container {

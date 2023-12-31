@@ -13,7 +13,7 @@ const sessionSecret = crypto.randomBytes(32).toString('hex');
 
 const app = express();
 
-app.use(clog)
+app.use(clog);
 app.use(bodyParser.json());
 app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 app.use(passport.initialize());
