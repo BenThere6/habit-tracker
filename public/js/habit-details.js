@@ -6,9 +6,13 @@ document.addEventListener('DOMContentLoaded', async () => {
     await updatePerformancesToday(habitId);
 
     document.getElementById('markPerformedButton').addEventListener('click', async () => {
-        markHabitAsPerformed(habitId);
+        await markHabitAsPerformed(habitId);
+        
+        // Wait for a short delay to ensure the server has processed the update
+        await delay(500);
+    
         await updatePerformancesToday(habitId);
-
+    
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = getCurrentDate();
     });
@@ -82,25 +86,27 @@ function getCurrentDate() {
 }
 
 function markHabitAsPerformed(habitId) {
-    fetch(`/api/habit/markPerformed/${habitId}`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-    })
+    return new Promise((resolve, reject) => {
+        fetch(`/api/habit/markPerformed/${habitId}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+        })
         .then(response => response.json())
         .then(data => {
             if (data.success) {
-                // After marking the habit as performed, you may want to update the UI
-                // You can call a function here to refresh the habit details or do any other necessary updates
-                // For example, display a success message or update the last performed date
+                resolve(data);
             } else {
                 console.error('Error:', data.error);
+                reject(data.error);
             }
         })
         .catch(error => {
             console.error('Error:', error);
+            reject(error);
         });
+    });
 }
 
 async function getPerformancesToday(habitId, divToUpdate) {
@@ -124,4 +130,8 @@ async function updatePerformancesToday(habitId) {
     } catch (error) {
         console.error('Error:', error);
     }
+}
+
+function delay(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
 }
