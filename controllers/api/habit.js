@@ -48,6 +48,8 @@ router.get('/fetch', async (req, res) => {
 
 router.post('/markPerformed/:habitId', async (req, res) => {
     try {
+        const userTime = moment().tz(userTimezone).toDate();
+
         const { habitId } = req.params;
         const userId = req.user.id;
 
@@ -62,7 +64,7 @@ router.post('/markPerformed/:habitId', async (req, res) => {
         await Performances.create({
             user_id: userId,
             habit_id: habitId,
-            performance_date: new Date(),
+            performance_date: userTime,
         });
 
         res.json({ success: true });

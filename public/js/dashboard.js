@@ -164,16 +164,14 @@ async function createHabitTile(habit) {
         habitDiv.className = 'habit-item bad-habit';
         numLabel.textContent = 'Days Without';
 
-        const lastPerformedDate = new Date(habit.last_performed);
-        const currentDate = new Date();
-        const timeDifference = currentDate.getTime() - lastPerformedDate.getTime();
+        // Use Moment.js for date comparison
+        const lastPerformedDate = moment(habit.last_performed).startOf('day');
+        const currentDate = moment().startOf('day');
+        const daysSince = currentDate.diff(lastPerformedDate, 'days');
 
         const daysSinceDiv = document.createElement('div');
         daysSinceDiv.className = 'days-since tile-num';
-        daysSinceDiv.textContent = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-        if (daysSinceDiv.textContent > 19661) {
-            daysSinceDiv.textContent = 'N/A';
-        }
+        daysSinceDiv.textContent = daysSince >= 0 ? daysSince : 'N/A';
 
         habitDiv.appendChild(daysSinceDiv);
         habitDiv.appendChild(numLabel);
