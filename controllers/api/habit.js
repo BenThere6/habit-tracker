@@ -3,7 +3,6 @@ const { sequelize, Habit, Performances } = require('../../models');
 const { Op } = require('sequelize');
 const moment = require('moment-timezone');
 const userTimezone = 'America/Denver';
-// const { adjustedDate } = require('../../utils/getDate');
 
 router.post('/add', async (req, res) => {
     try {
@@ -76,8 +75,6 @@ router.post('/markPerformed/:habitId', async (req, res) => {
 router.get('/performancesToday/:habitId', async (req, res) => {
     try {
         const { habitId } = req.params;
-
-        // Get the performances for the habit and user
         const performances = await Performances.findAll({
             where: {
                 habit_id: habitId,
@@ -85,14 +82,12 @@ router.get('/performancesToday/:habitId', async (req, res) => {
         });
 
         let performancesToday = 0;
+        const currentDate = moment().tz(userTimezone).startOf('day');
 
-        // Iterate through each performance and check if it was performed today after 3 AM in the user's time zone
         performances.forEach((performance) => {
             const performanceDate = moment(performance.performance_date).tz(userTimezone);
-            const currentDate = moment().tz(userTimezone);
-            const threeAMToday = currentDate.startOf('day').hour(3);
 
-            if (performanceDate.isSameOrAfter(threeAMToday)) {
+            if (performanceDate.isSameOrAfter(currentDate)) {
                 performancesToday++;
             }
         });
