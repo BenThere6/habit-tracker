@@ -104,7 +104,6 @@ router.get('/streak/:habitId', async (req, res) => {
         const { habitId } = req.params;
         const userId = req.user.id;
 
-        // Get the performances for the habit and user, sorted by performance_date in descending order
         const performances = await Performances.findAll({
             where: {
                 habit_id: habitId,
@@ -113,21 +112,17 @@ router.get('/streak/:habitId', async (req, res) => {
             order: [['performance_date', 'DESC']],
         });
 
-        // Initialize streak to 0
         let streak = 0;
+        let checkDate = moment().tz(userTimezone).subtract(1, 'days').startOf('day'); // Start checking from yesterday
 
-        // Get the current date and time in the user's time zone
-        let currentDate = moment().tz(userTimezone);
-        // Iterate through each performance starting with the most recent ones
         for (const performance of performances) {
-            const performanceDate = moment(performance.performance_date).tz(userTimezone);
+            const performanceDate = moment(performance.performance_date).tz(userTimezone).startOf('day');
 
-            // Check if the performance is on the same day as currentDate or the day before
-            if (performanceDate.isSame(currentDate, 'day') || performanceDate.isSame(currentDate.clone().subtract(1, 'day'), 'day')) {
+            if (performanceDate.isSame(checkDate, 'day')) {
                 streak++;
-                currentDate = performanceDate; // Update currentDate
-            } else {
-                break; // If there's a gap in performances, stop counting streak
+                checkDate.subtract(1, 'days'); // Move check date to the previous day
+            } else if (performanceDate.isBefore(checkDate, 'day')) {
+                break; // If there's a gap in performances, stop counting the streak
             }
         }
 
