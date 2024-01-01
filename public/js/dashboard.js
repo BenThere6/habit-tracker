@@ -1,5 +1,3 @@
-// let adjustedDate = getAdjustedDateDate();
-
 document.getElementById('habit-form').addEventListener('submit', function (e) {
     e.preventDefault();
 
@@ -173,7 +171,7 @@ async function createHabitTile(habit) {
         const daysSinceDiv = document.createElement('div');
         daysSinceDiv.className = 'days-since tile-num';
         daysSinceDiv.textContent = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-        if (daysSinceDiv.textContent == 19661) {
+        if (daysSinceDiv.textContent > 19661) {
             daysSinceDiv.textContent = 'N/A';
         }
 
