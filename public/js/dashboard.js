@@ -146,6 +146,11 @@ async function createHabitTile(habit) {
     numLabel.className = 'num-label';
 
     if (habit.habit_type === 'good') {
+        const performedToday = await isHabitPerformedToday(habit.habit_id);
+        if (!performedToday) {
+            habitDiv.style.border = '2px solid red';
+        }
+
         habitDiv.className = 'habit-item good-habit';
         numLabel.textContent = 'Current Streak';
 
@@ -222,5 +227,21 @@ async function adjustFontSize() {
         });
     } catch (error) {
         console.error('Error: ', error);
+    }
+}
+
+async function isHabitPerformedToday(habitId) {
+    try {
+        const response = await fetch(`/api/habit/performancesToday/${habitId}`);
+        const data = await response.json();
+        if (data.success) {
+            return data.performancesToday > 0;
+        } else {
+            console.error('Error:', data.error);
+            return false;
+        }
+    } catch (error) {
+        console.error('Error:', error);
+        return false;
     }
 }
