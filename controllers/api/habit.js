@@ -117,8 +117,13 @@ router.get('/streak/:habitId', async (req, res) => {
         let streak = 0;
         let checkDate = moment().tz(userTimezone).subtract(1, 'days').startOf('day'); // Start checking from yesterday
 
+        const performanceDate = moment(performance.performance_date).tz(userTimezone).startOf('day');
+
+        if (performanceDate.isSame(moment().tz(userTimezone).startOf('day')), 'day') {
+            streak++;
+        }
+
         for (const performance of performances) {
-            const performanceDate = moment(performance.performance_date).tz(userTimezone).startOf('day');
 
             if (performanceDate.isSame(checkDate, 'day')) {
                 streak++;
