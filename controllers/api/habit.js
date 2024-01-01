@@ -153,20 +153,26 @@ router.get('/details/:habitId', async (req, res) => {
         if (!habitDetails) {
             return res.status(404).json({ success: false, error: 'Habit not found' });
         }
+
         let formattedDate;
         if (habitDetails.last_performed) {
-            var lastPerformedDate = new Date(habitDetails.last_performed)
-            const isoString = lastPerformedDate.toISOString();
-            formattedDate = isoString.split('T')[0];
+            const lastPerformedDate = moment(habitDetails.last_performed).tz(userTimezone);
+            formattedDate = lastPerformedDate.format('MM-DD-YYYY');
         } else {
-            formattedDate = 'N/A'
+            formattedDate = 'N/A';
         }
-        res.render('habit-details', { habit_name: habitDetails.habit_name, habit_type: habitDetails.habit_type, last_performed: formattedDate, habit_id: habitDetails.habit_id });
+
+        res.render('habit-details', {
+            habit_name: habitDetails.habit_name,
+            habit_type: habitDetails.habit_type,
+            last_performed: formattedDate,
+            habit_id: habitDetails.habit_id
+        });
     } catch (err) {
         res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
         console.log(err);
     }
-})
+});
 
 router.post('/delete/:habitId', async (req, res) => {
     const habitId = req.params.habitId;
