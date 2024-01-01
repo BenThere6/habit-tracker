@@ -115,20 +115,20 @@ router.get('/streak/:habitId', async (req, res) => {
         });
 
         let streak = 0;
-        let checkDate = moment().tz(userTimezone).subtract(1, 'days').startOf('day'); // Start checking from yesterday
-
-        const performanceDate = moment(performance.performance_date).tz(userTimezone).startOf('day');
-
-        if (performanceDate.isSame(moment().tz(userTimezone).startOf('day')), 'day') {
-            streak++;
-        }
+        let checkDate = moment().tz(userTimezone).startOf('day'); // Start checking from today
 
         for (const performance of performances) {
+            const performanceDate = moment(performance.performance_date).tz(userTimezone).startOf('day');
 
             if (performanceDate.isSame(checkDate, 'day')) {
                 streak++;
-                checkDate.subtract(1, 'days'); // Move check date to the previous day
+                checkDate = checkDate.subtract(1, 'days'); // Move check date to the previous day
             } else if (performanceDate.isBefore(checkDate, 'day')) {
+                // If there's no performance today, continue from yesterday
+                if (streak === 0) {
+                    checkDate = checkDate.subtract(1, 'days');
+                    continue;
+                }
                 break; // If there's a gap in performances, stop counting the streak
             }
         }
