@@ -260,6 +260,7 @@ footer {
     font-family: 'DM Serif Display';
     font-size: 25px;
     text-shadow: 0 0 3px #333, 0 0 5px #000000;
+    z-index:10;
 }
 
 .tile-num {

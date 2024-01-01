@@ -208,7 +208,6 @@ async function getHabitStreak(habitId) {
 async function adjustFontSize() {
     try {
         const allTileNums = document.querySelectorAll('.tile-num');
-        console.log("All tile numbers found: ", allTileNums.length); // Debugging
 
         allTileNums.forEach((tileNum) => {
             // Calculate the number of digits in the streak
