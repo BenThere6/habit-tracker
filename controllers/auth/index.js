@@ -31,8 +31,13 @@ router.post('/login', (req, res, next) => {
             if (err) {
                 return next(err);
             }
+            // Set session expiration based on "Remember Me"
+            if (req.body.rememberMe) {
+                req.session.cookie.maxAge = 30 * 24 * 60 * 60 * 1000; // e.g., 30 days
+            } else {
+                req.session.cookie.expires = false; // Session ends when browser is closed
+            }
             res.status(200).send('OK');
-            return;
         });
     });
 });
