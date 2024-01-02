@@ -2,6 +2,10 @@
     display: none;
 }
 
+input, select, textarea {
+    font-size: 16px; /* or larger */
+}
+
 .center-hor {
     display: flex;
     justify-content: center;
