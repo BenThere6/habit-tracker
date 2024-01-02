@@ -6,7 +6,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Habit Tracker</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=DM+Serif+Display|Rubik+Doodle+Shadow&display=swap">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css?family=DM+Serif+Display|Rubik+Doodle+Shadow&display=swap">
     <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -70,6 +71,27 @@
                 popupMenu.classList.add('hide');
             });
         });
+
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js')
+                .then(registration => {
+                    console.log('Service Worker Registered', registration);
+                })
+                .catch(error => {
+                    console.error('Service Worker Registration Failed', error);
+                });
+        }
+
+        function subscribeUserToPush() {
+            Notification.requestPermission().then(permission => {
+                if (permission === 'granted') {
+                    // User granted permission
+                    navigator.serviceWorker.ready.then(registration => {
+                        // Subscribe to push
+                    });
+                }
+            });
+        }
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
 </body>
