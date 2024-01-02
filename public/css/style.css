@@ -3,7 +3,7 @@
 }
 
 input, select, textarea {
-    font-size: 16px; /* or larger */
+    font-size: 16px;
 }
 
 .center-hor {
@@ -60,7 +60,6 @@ nav ul {
 li {
     display: flex;
     flex-direction: row;
-    /* justify-content: space-around; */
     align-items: center;
     font-size: medium;
 }
@@ -74,10 +73,7 @@ li {
     height:20px;
     width: 20px;
     filter: invert(100%);
-    /* position: relative;
-    top: 3px; */
     vertical-align: middle;
-    /* margin-left: 95%; */
 }
 
 #popup-menu {
@@ -100,6 +96,9 @@ li {
     margin: 0 30px 10px 10px;
     padding: 20px 10px 10px 10px;
     border-top: rgb(152, 152, 152) solid .4px;
+    display: flex;
+    justify-content: center;
+    font-size: 18px;
 }
 
 .menu-links > a {
@@ -275,7 +274,6 @@ footer {
     top: 0;
     width: 100%;
     text-align: center;
-    /* color: #333; */
     font-family: 'DM Serif Display';
     font-size: 25px;
     text-shadow: 0 0 3px #333, 0 0 5px #333;
