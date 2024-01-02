@@ -412,6 +412,12 @@ footer {
     height: 400px;
 }
 
+/* Settings */
+.settings-container {
+    width: 400px;
+    height: 500px;
+}
+
 @media screen and (max-width:892px) {
     header {
         font-size: 40px;
