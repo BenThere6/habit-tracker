@@ -1,6 +1,10 @@
 const router = require('express').Router();
 const { ensureAuthenticated } = require('../middleware/authMiddleware'); 
 
+router.get('/settings', ensureAuthenticated, (req, res) => {
+    res.render('settings');
+});
+
 router.get('/contact', (req, res) => {
     res.render('contact');
 });
