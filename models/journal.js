@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/sequelize');
 
-class Journal extends Model {}
+class Entries extends Model {}
 
-Journal.init(
+Entries.init(
     {
         entry_id: {
             type: DataTypes.INTEGER,
@@ -35,4 +35,4 @@ Journal.init(
     }
 );
 
-module.exports = Journal;
+module.exports = Entries;
