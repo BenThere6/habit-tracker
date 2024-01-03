@@ -63,8 +63,8 @@ async function displayHabits() {
                 goodCard.className = 'good-card auth-container';
                 badCard.className = 'bad-card auth-container';
 
-                const goodTitle = document.createElement('h2');
-                const badTitle = document.createElement('h2');
+                const goodTitle = document.createElement('div');
+                const badTitle = document.createElement('div');
                 goodTitle.className = 'good-title habit-title';
                 badTitle.className = 'bad-title habit-title';
                 goodTitle.textContent = "Good Habits";
