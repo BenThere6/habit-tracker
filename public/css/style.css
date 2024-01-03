@@ -107,6 +107,7 @@ li {
     display: flex;
     justify-content: center;
     font-size: 18px;
+    font-family: 'Montserrat';
 }
 
 .menu-links > a {
