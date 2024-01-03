@@ -14,15 +14,15 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('/service-worker.js')
-        .then(registration => {
-            console.log('Service Worker Registered', registration);
-        })
-        .catch(error => {
-            console.error('Service Worker Registration Failed', error);
-        });
-}
+// if ('serviceWorker' in navigator) {
+//     navigator.serviceWorker.register('/service-worker.js')
+//         .then(registration => {
+//             console.log('Service Worker Registered', registration);
+//         })
+//         .catch(error => {
+//             console.error('Service Worker Registration Failed', error);
+//         });
+// }
 
 function subscribeUserToPush() {
     Notification.requestPermission().then(permission => {

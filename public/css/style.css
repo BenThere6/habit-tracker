@@ -19,6 +19,12 @@ input, select, textarea {
     position: relative;
 }
 
+#coming-soon {
+    font-size:70px;
+    font-family: 'DM Serif Display';
+    padding: 50px 0 50px 0;
+}
+
 /* main */
 .page-container {
     margin: 0;
