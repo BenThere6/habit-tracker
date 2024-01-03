@@ -1,0 +1,39 @@
+<div class="center-hor">
+    <div class="auth-container">
+        <h1>Journal</h1>
+        <section>
+            <h2>Add New Entry</h2>
+            <form id="new-journal-entry">
+                <div>
+                    <label for="habit">Habit:</label>
+                    <select id="habit" name="habit">
+                        <!-- Dynamically load habit options here -->
+                    </select>
+                </div>
+                <div>
+                    <label for="entryDate">Date:</label>
+                    <input type="date" id="entryDate" name="entryDate">
+                </div>
+                <div>
+                    <label for="entryText">Entry:</label>
+                    <textarea id="entryText" name="entryText" rows="4" cols="50"></textarea>
+                </div>
+                <button type="submit">Add Entry</button>
+            </form>
+        </section>
+
+        <section>
+            <h2>Past Entries</h2>
+            <div id="journal-entries">
+                {{#each journalEntries as |entry|}}
+                    <div class="journal-entry">
+                        <h3>{{entry.habitName}} ({{entry.entryDate}})</h3>
+                        <p>{{entry.entryText}}</p>
+                    </div>
+                {{/each}}
+            </div>
+        </section>
+    </div>
+</div>
+
+<script src="/js/journal.js"></script>
