@@ -17,15 +17,8 @@ Responsive Design: The application is mobile-friendly and responsive to various 
 * Authentication: Passport.js
 * Styling: CSS Variables for easy theme management
 
-## Installation
-* Clone the repository: git clone https://github.com/BenThere6/habit-tracker.git
-* Navigate to the project directory: cd habit-tracker
-* Install dependencies: npm install
-* Create a .env file for environment variables based on the .env.example template provided
-* Run the application: npm start
-
 ## Usage
-After installation, open your browser and go to http://localhost:3000. Create an account to start tracking your habits. Add new habits using the dashboard and mark them as completed daily. Visit the Journal page to reflect on your habit performance.
+Start tracking your habits today by visiting [Habit Tracker](https://fierce-tor-16803-290b9f9ab8e3.herokuapp.com). Simply create an account and begin your journey towards better habit management.
 
 ## License
 Distributed under the MIT License. See LICENSE for more information.
