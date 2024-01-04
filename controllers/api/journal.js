@@ -15,7 +15,7 @@ router.post('/add', async (req, res) => {
         res.status(200).json(newEntry);
     } catch (error) {
         console.error('Error adding journal entry:', error);
-        res.status(501).json({ error: 'Failed to create a new journal entry', details: error.message });
+        res.status(500).json({ error: 'Failed to create a new journal entry', details: error.message });
     }    
 });
 

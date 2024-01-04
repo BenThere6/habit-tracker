@@ -2,20 +2,20 @@ document.getElementById('new-journal-entry').addEventListener('submit', async fu
     event.preventDefault();
 
     try {
-        // Fetch current user's ID
         const userIdResponse = await fetch('/api/currentUserId');
         if (!userIdResponse.ok) {
             throw new Error('Could not fetch user ID');
         }
         const userIdData = await userIdResponse.json();
 
-        const habitId = document.getElementById('habit-select').value;
+        const habitSelectElement = document.getElementById('habit-select');
+        const habitId = habitSelectElement.value || null;  // Set to null if no habit is selected
         const entryText = document.getElementById('entryText').value;
         const entryDate = new Date().toISOString();
 
         const requestBody = {
-            user_id: userIdData.userId, // Include the user's ID in the request body
-            habit_id: habitId,
+            user_id: userIdData.userId,
+            habit_id: habitId,  // This can be null
             entryText: entryText,
             entry_date: entryDate
         };
@@ -34,7 +34,7 @@ document.getElementById('new-journal-entry').addEventListener('submit', async fu
 
         const addEntryData = await addEntryResponse.json();
         console.log('Journal entry added:', addEntryData);
-        // Handle the successful addition of a journal entry (e.g., clear form, update UI)
+        // Handle the successful addition of a journal entry
     } catch (error) {
         console.error('Error:', error);
     }
