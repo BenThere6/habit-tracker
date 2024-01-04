@@ -3,9 +3,8 @@ const habitRoutes = require('./habit');
 const journalRoutes = require('./journal');
 const { ensureAuthenticated } = require('../../middleware/authMiddleware');
 
+router.use('/journal', ensureAuthenticated, journalRoutes);
 router.use('/habit', ensureAuthenticated, habitRoutes);
-
-router.use('/journal', ensureAuthenticated, habitRoutes);
 
 router.post('/handleSmsReply', (req, res) => {
     const textId = req.body.textId;
@@ -15,6 +14,14 @@ router.post('/handleSmsReply', (req, res) => {
     console.log(`Received SMS reply from ${fromNumber}: ${text}`);
 
     res.sendStatus(200);
+});
+
+router.get('/currentUserId', (req, res) => {
+    if (req.isAuthenticated()) {
+        res.json({ userId: req.user.id });
+    } else {
+        res.status(401).json({ error: 'User not authenticated' });
+    }
 });
 
 module.exports = router;

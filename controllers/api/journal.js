@@ -14,8 +14,9 @@ router.post('/add', async (req, res) => {
         });
         res.status(200).json(newEntry);
     } catch (error) {
-        res.status(500).json({ error: 'Failed to create a new journal entry' });
-    }
+        console.error('Error adding journal entry:', error);
+        res.status(501).json({ error: 'Failed to create a new journal entry', details: error.message });
+    }    
 });
 
 // Route to get all journal entries for a specific user

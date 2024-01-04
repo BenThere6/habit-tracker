@@ -5,14 +5,11 @@
             <h2>Add New Entry</h2>
             <form id="new-journal-entry">
                 <div>
-                    <label for="habit">Habit:</label>
-                    <select id="habit" name="habit">
+                    <label for="habit-select">Habit:</label>
+                    <select id="habit-select" name="habit-select">
+                        <option value="" disabled selected>Select Habit</option>
                         <!-- Dynamically load habit options here -->
                     </select>
-                </div>
-                <div>
-                    <label for="entryDate">Date:</label>
-                    <input type="date" id="entryDate" name="entryDate">
                 </div>
                 <div>
                     <label for="entryText">Entry:</label>
