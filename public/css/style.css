@@ -1,3 +1,17 @@
+:root {
+    --primary-color: #4CAF50; /* Green */
+    --secondary-color: #E53935; /* Red */
+    --background-color: #333; /* Dark Grey */
+    --text-color: #fff; /* White */
+    --accent-color: #3498db; /* Blue */
+    --font-main: 'Montserrat', sans-serif;
+    --font-alternative: 'DM Serif Display', serif;
+    --font-special: 'Rubik Doodle Shadow', cursive;
+    --font-size-large: 40px;
+    --font-size-medium: 30px;
+    --font-size-small: 18px;
+}
+
 .hide {
     display: none;
 }
@@ -43,7 +57,7 @@ input, select, textarea {
 }
 
 nav {
-    background-color: #333;
+    background-color: var(--background-color);
     padding: 3px 0;
     z-index: 1001;
     position: relative;
@@ -59,10 +73,10 @@ nav ul {
 }
 
 #title {
-    padding-left:30px;
-    padding-right:0;
-    font-family: 'Montserrat';
-    font-size: 30px;
+    padding-left: 30px;
+    padding-right: 0;
+    font-family: var(--font-main);
+    font-size: var(--font-size-medium);
 }
 
 li {
@@ -74,7 +88,7 @@ li {
 
 .nav-links {
     display: inline-block;
-    
+    color: var(--text-color);
 }
 
 #settings-icon {
@@ -262,13 +276,13 @@ footer {
 }
 
 .good-habit {
-    background-color: #4CAF50;
-    color: #fff;
+    background-color: var(--primary-color);
+    color: var(--text-color);
 }
 
 .bad-habit {
-    color: #fff;
-    background-color: #E53935;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
 }
 
 .habit-item button {
@@ -290,7 +304,7 @@ footer {
     top: 0;
     width: 100%;
     text-align: center;
-    font-family: 'DM Serif Display';
+    font-family: var(--font-alternative);
     font-size: 25px;
     text-shadow: 0 0 3px #333, 0 0 5px #333;
     z-index:10;
@@ -308,7 +322,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    font-family: 'Rubik Doodle Shadow';
+    font-family: var(--font-special);
 }
 
 .num-label {
