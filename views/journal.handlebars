@@ -1,32 +1,32 @@
 <div class="center-hor">
     <div class="auth-container">
-        <h1>Journal</h1>
+        <h1 class="habit-title">Journal</h1>
         <section>
-            <h2>Add New Entry</h2>
-            <form id="new-journal-entry">
-                <div>
-                    <label for="habit-select">Habit:</label>
-                    <select id="habit-select" name="habit-select">
-                        <option value="" disabled selected>Select Habit (optional)</option>
+            <h2 class="habit-title">Add New Entry</h2>
+            <form id="new-journal-entry" class="form-container">
+                <div class="form-field">
+                    <label for="habit-select"></label>
+                    <select id="habit-select" name="habit-select" class="auth-input">
+                        <option value="" disabled selected>Habit (Optional)</option>
                         <!-- Dynamically load habit options here -->
                     </select>
                 </div>
-                <div>
+                <div class="form-field">
                     <label for="entryText">Entry:</label>
-                    <textarea id="entryText" name="entryText" rows="4" cols="50" required></textarea>
+                    <textarea id="entryText" name="entryText" class="auth-input" rows="4" cols="50" required></textarea>
                 </div>
-                <button type="submit">Add Entry</button>
+                <button type="submit" class="submit-btn">Add Entry</button>
             </form>
         </section>
 
         <section>
-            <h2>Past Entries</h2>
-            <div id="journal-entries">
+            <h2 class="habit-title">Past Entries</h2>
+            <div id="journal-entries" class="text-box">
                 {{#each journalEntries as |entry|}}
-                    <div class="journal-entry">
-                        <h3>{{entry.habitName}} ({{entry.entryDate}})</h3>
-                        <p>{{entry.entryText}}</p>
-                    </div>
+                <div class="journal-entry">
+                    <h3 class="habit-name">{{entry.entryDate}} {{entry.habitName}} </h3>
+                    <p>{{entry.entryText}}</p>
+                </div>
                 {{/each}}
             </div>
         </section>
