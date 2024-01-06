@@ -12,6 +12,18 @@
     --font-size-small: 18px;
 }
 
+.font-main {
+    font-family: var(--font-main);
+}
+
+.font-alternative {
+    font-family: var(--font-alternative);
+}
+
+.font-special {
+    font-family: var(--font-special);
+}
+
 .hide {
     display: none;
 }
