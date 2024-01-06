@@ -10,12 +10,24 @@ const { engine } = require('express-handlebars')
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog')
 const sessionSecret = crypto.randomBytes(32).toString('hex');
+const RedisStore = require('connect-redis')(session);
+const redis = require('redis');
 
 const app = express();
 
 app.use(clog);
 app.use(bodyParser.json());
-app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
+app.use(session({
+    store: new RedisStore({ url: process.env.REDIS_URL }),
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: true,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: 'strict'
+      }
+  }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
