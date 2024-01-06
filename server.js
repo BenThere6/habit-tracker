@@ -6,24 +6,29 @@ const flash = require('connect-flash');
 const bodyParser = require('body-parser');
 const controllers = require('./controllers');
 const { User } = require('./models');
-const { engine } = require('express-handlebars')
+const { engine } = require('express-handlebars');
 const crypto = require('crypto');
-const { clog } = require('./middleware/clog')
+const { clog } = require('./middleware/clog');
 const sessionSecret = crypto.randomBytes(32).toString('hex');
-// const connectRedis = require('connect-redis');
-const RedisStore = require("connect-redis").default;
-const { createClient } = require('redis');
+// const RedisStore = require('connect-redis').default;
+// const redis = require('redis');
 
 const app = express();
+
+// console.log('Redis URL:', process.env.REDIS_URL);
 
 app.use(clog);
 app.use(bodyParser.json());
 
-let redisClient = createClient({ url: process.env.REDISCLOUD_URL });
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
+// const redisClient = redis.createClient({
+//     url: process.env.REDISCLOUD_URL,
+//     legacyMode: true
+// });
+// redisClient.connect().catch(console.error);
+// redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
+    // store: new RedisStore({ client: redisClient }),
     secret: sessionSecret,
     resave: false,
     saveUninitialized: true,
@@ -39,7 +44,7 @@ app.use(passport.session());
 app.use(flash());
 app.engine('handlebars', engine());
 app.set('view engine', 'handlebars');
-app.set('views', './views')
+app.set('views', './views');
 app.use((req, res, next) => {
     res.locals.authenticated = req.isAuthenticated();
     next();
@@ -72,7 +77,7 @@ passport.deserializeUser((id, done) => {
     });
 });
 
-port = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 app.listen(port, () => {
     console.log(`Server is running at http://localhost:${port}`);
 });
