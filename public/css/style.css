@@ -298,7 +298,7 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    justify-content: space-evenly;
+    justify-content: center;
 }
 
 .habit-title {
