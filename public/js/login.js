@@ -12,14 +12,18 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
         body: JSON.stringify({ email, password, rememberMe }),
         headers: { 'Content-Type': 'application/json' },
     });
+    const errorMessageElement = document.getElementById('login-error-message');
     if (response.status === 400) {
         return response.json().then(data => {
             const errorMessage = data.error;
-            const errorMessageElement = document.getElementById('message');
             errorMessageElement.textContent = errorMessage;
             errorMessageElement.style.display = 'block';
             passwordEl.value = '';
         });
     } else if (response.ok) {
         document.location.replace('/dashboard');
-    }});
+    } else {
+        errorMessageElement.textContent = 'An error occurred. Please try again.';
+        errorMessageElement.style.display = 'block';
+    }
+    });

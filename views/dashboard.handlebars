@@ -1,24 +1,25 @@
 <div id="dashboard-container">
-  <div id="habit-container">
-    <!-- Habits will be displayed here -->
-  </div>
+  <div id="dashboard-content" class="auth-container">
+    <div id="habit-container">
+      <!-- Habits will be displayed here -->
+    </div>
+    <h3 id="new-habit-title" class="separate-border">Add a New Habit:</h3>
+    <div class="wid-100 center-hor">
+      <form id="habit-form">
+        <label for="habitName"></label>
+        <input type="text" id="habitName" class="add-habit" name="habitName" placeholder="Habit Name" required>
 
-  <div class="auth-container form-container">
-    <h3 id="new-habit-title">Add a New Habit:</h3>
-    <form id="habit-form">
-      <label for="habitName"></label>
-      <input type="text" id="habitName" class="add-habit" name="habitName" placeholder="Habit Name" required>
-
-      <label for="habitType"></label>
-      <select class="add-habit" id="habitType" name="habitType" required>
-        <option value="" disabled selected>Select Habit Type</option>
-        <option value="good">Good</option>
-        <option value="bad">Bad</option>
-      </select>
-      <div class="center-hor">
-        <button class="submit-btn" type="submit">Add Habit</button>
-      </div>
-    </form>
+        <label for="habitType"></label>
+        <select class="add-habit" id="habitType" name="habitType" required>
+          <option value="" disabled selected>Select Habit Type</option>
+          <option value="good">Good</option>
+          <option value="bad">Bad</option>
+        </select>
+        <div class="center-hor">
+          <button class="submit-btn" type="submit">Add Habit</button>
+        </div>
+      </form>
+    </div>
   </div>
 </div>
 <script src="/js/dashboard.js"></script>

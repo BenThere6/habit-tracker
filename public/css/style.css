@@ -24,6 +24,42 @@
     font-family: var(--font-special);
 }
 
+.separate-border {
+    position: relative;
+}
+
+.wid-100 {
+    width: 100%;
+}
+
+.separate-border::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 25%;
+    width: 50%;
+    border-top: 2px solid black;
+    height: 0;
+}
+
+.error-message {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%;
+    margin-top: 30px;
+    padding: 10px;
+    text-align: center;
+    background-color: #ffdddd;
+    border: 1px solid #ff0000;
+    color: #ff0000;
+    border-radius: 5px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 14px;
+    display: none;
+}
+
 .hide {
     display: none;
 }
@@ -49,6 +85,10 @@ input, select, textarea {
     font-size:70px;
     font-family: 'DM Serif Display';
     padding: 50px 0 50px 0;
+}
+
+#loginForm, #registration-form {
+    position: relative;
 }
 
 /* main */
@@ -258,17 +298,18 @@ footer {
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    /* justify-content: center; */
+    justify-content: space-evenly;
 }
 
 .habit-title {
     padding-bottom:15px;
     font-family: 'merriweather sans';
-    text-align: start;
+    text-align: center;
 }
 
 #new-habit-title {
     font-family: 'merriweather sans';
+    padding-top:30px;
 }
 
 .habit-item {
@@ -357,6 +398,7 @@ footer {
 #habit-form {
     display:flex;
     flex-direction: column;
+    max-width:800px;
 }
 
 .add-habit {
@@ -481,6 +523,9 @@ footer {
     }
     #not-found-img {
         height: 200px;
+    }
+    #dashboard-content {
+        box-shadow: none;
     }
 }
 
