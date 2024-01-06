@@ -10,7 +10,8 @@ const { engine } = require('express-handlebars')
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog')
 const sessionSecret = crypto.randomBytes(32).toString('hex');
-let RedisStore = require('connect-redis')(session);
+const connectRedis = require('connect-redis');
+const RedisStore = connectRedis(session);
 const { createClient } = require('redis');
 
 const app = express();
