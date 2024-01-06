@@ -524,7 +524,7 @@ footer {
     #not-found-img {
         height: 200px;
     }
-    #dashboard-content {
+    #dashboard-content, #contact-content {
         box-shadow: none;
     }
 }
