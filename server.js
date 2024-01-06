@@ -27,17 +27,18 @@ app.use(bodyParser.json());
 // redisClient.connect().catch(console.error);
 // redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-app.use(session({
-    // store: new RedisStore({ client: redisClient }),
-    secret: sessionSecret,
-    resave: false,
-    saveUninitialized: true,
-    cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: 'strict'
-    }
-}));
+// app.use(session({
+//     store: new RedisStore({ client: redisClient }),
+//     secret: sessionSecret,
+//     resave: false,
+//     saveUninitialized: true,
+//     cookie: {
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV === "production",
+//         sameSite: 'strict'
+//     }
+// }));
+app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
