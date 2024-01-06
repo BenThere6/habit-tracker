@@ -10,20 +10,20 @@ const { engine } = require('express-handlebars')
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog')
 const sessionSecret = crypto.randomBytes(32).toString('hex');
-const connectRedis = require('connect-redis');
-const RedisStore = connectRedis(session);
-const { createClient } = require('redis');
+// const connectRedis = require('connect-redis');
+// const RedisStore = connectRedis(session);
+// const { createClient } = require('redis');
 
 const app = express();
 
 app.use(clog);
 app.use(bodyParser.json());
 
-let redisClient = createClient({ url: process.env.REDISCLOUD_URL });
-redisClient.on('error', (err) => console.log('Redis Client Error', err));
+// let redisClient = createClient({ url: process.env.REDISCLOUD_URL });
+// redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
 app.use(session({
-    store: new RedisStore({ client: redisClient }),
+    // store: new RedisStore({ client: redisClient }),
     secret: sessionSecret,
     resave: false,
     saveUninitialized: true,
