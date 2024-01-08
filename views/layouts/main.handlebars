@@ -20,6 +20,7 @@
             </header>
             {{#if authenticated}}
             <li class="nav-links"><a href="/dashboard">Dashboard</a></li>
+            <li class="nav-links"><a href="/journal">Journal</a></li>
             <li class="nav-links"><a href="/contact">Contact</a></li>
             <li class="nav-links"><a href="/auth/logout">Logout</a></li>
             <li class="nav-links"><a href="/settings"><img id='settings-icon' src='/assets/settings.png' alt='Settings'></a></li>
@@ -32,6 +33,9 @@
             <div class="center-ver">
                 <img id="menu-icon" src="/assets/menu.png" alt="menu icon">
             </div>
+            {{!-- <div class="center-ver">
+                <img id="large-menu-icon" src="/assets/menu.png" alt="menu icon">
+            </div> --}}
         </ul>
     </nav>
     <div id="popup-menu" class="hide">
@@ -39,6 +43,7 @@
             <ul id="menu-list">
                 {{#if authenticated}}
                 <li class="menu-links"><a href="/dashboard">Dashboard</a></li>
+                <li class="menu-links"><a href="/journal">Journal</a></li>
                 <li class="menu-links"><a href="/contact">Contact</a></li>
                 <li class="menu-links"><a href="/settings">Settings</a></li>
                 <li class="menu-links"><a href="/auth/logout">Logout</a></li>
@@ -51,6 +56,24 @@
             </ul>
         </div>
     </div>
+    {{!-- <div id="large-popup-menu" class="hide">
+        <div>
+            <ul id="large-menu-list">
+                {{#if authenticated}}
+                <li class="menu-links"><a href="/dashboard">Dashboard</a></li>
+                <li class="menu-links"><a href="/journal">Journal</a></li>
+                <li class="menu-links"><a href="/contact">Contact</a></li>
+                <li class="menu-links"><a href="/settings">Settings</a></li>
+                <li class="menu-links"><a href="/auth/logout">Logout</a></li>
+                {{else}}
+                <li class="menu-links"><a href="/">Home</a></li>
+                <li class="menu-links"><a href="/auth/login">Login</a></li>
+                <li class="menu-links"><a href="/auth/register">Register</a></li>
+                <li class="menu-links"><a href="/contact">Contact</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </div> --}}
     <div class="content-wrap">
         {{{body}}}
     </div>

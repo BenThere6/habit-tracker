@@ -191,6 +191,11 @@ li {
     display: none;
 }
 
+#large-menu-icon {
+    height: 40px;
+    display: flex;
+}
+
 #menu-list {
     padding: 0;
     margin: 0 3px 15px 25px;
@@ -576,6 +581,9 @@ footer {
     }
     #menu-icon {
         display: flex;
+    }
+    #large-menu-icon {
+        display: none;
     }
 }
 
