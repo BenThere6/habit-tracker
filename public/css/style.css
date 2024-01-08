@@ -572,6 +572,10 @@ footer {
     }
     #journal-content {
         width:100vw;
+        box-shadow: none;
+    }
+    #journal-entries {
+        padding: 0;
     }
 }
 
