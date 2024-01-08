@@ -528,6 +528,7 @@ footer {
 
 #journal-entries {
     text-align: start;
+    padding: 0 20px 0 20px;
 }
 
 .journal-entry {
@@ -536,7 +537,7 @@ footer {
 
 #journal-entries .journal-entry:not(:first-child) {
     /* padding-top: 30px; */
-    border-top: #333 solid 2px;
+    border-top: #333 solid 1px;
 }
 
 @media screen and (max-width:892px) {
