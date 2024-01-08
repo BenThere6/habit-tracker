@@ -32,15 +32,16 @@ document.getElementById('new-journal-entry').addEventListener('submit', async fu
         console.log('Journal entry added:', addEntryData);
         document.getElementById('new-journal-entry').reset();
 
-        // Inside the submit event listener, after adding a new entry
         const newEntryDiv = document.createElement('div');
         newEntryDiv.className = 'journal-entry';
 
-        const habitName = entry.habit_id ? ` - ${habitMap[entry.habit_id]}` : '';
-        const UIentryDate = new Date(entry.entry_date).toLocaleDateString();
-        entryDiv.innerHTML = `
-            <h3 class="font-alternative">${UIentryDate} ${habitName} </h3>
-            <p>${entry.entryText}</p>
+        // Ensure that habitMap[habitId] exists or handle accordingly
+        const habitName = habitId ? ` - ${habitMap[habitId] || 'Unknown Habit'}` : '';
+        const UIentryDate = new Date().toLocaleDateString();
+
+        newEntryDiv.innerHTML = `
+            <h3 class="font-alternative">${UIentryDate} ${habitName}</h3>
+            <p>${entryText}</p>
         `;
 
         const entriesContainer = document.getElementById('journal-entries');
