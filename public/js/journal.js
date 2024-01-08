@@ -36,12 +36,12 @@ document.getElementById('new-journal-entry').addEventListener('submit', async fu
         const newEntryDiv = document.createElement('div');
         newEntryDiv.className = 'journal-entry';
 
-        const habitName = habitId ? `Habit: ${habitMap[habitId]}` : 'General Entry';
-        const UIentryDate = new Date().toLocaleDateString();
-        newEntryDiv.innerHTML = `
-    <h3>${habitName} (${UIentryDate})</h3>
-    <p>${entryText}</p>
-`;
+        const habitName = entry.habit_id ? ` - ${habitMap[entry.habit_id]}` : '';
+        const UIentryDate = new Date(entry.entry_date).toLocaleDateString();
+        entryDiv.innerHTML = `
+            <h3 class="font-alternative">${UIentryDate} ${habitName} </h3>
+            <p>${entry.entryText}</p>
+        `;
 
         const entriesContainer = document.getElementById('journal-entries');
         entriesContainer.prepend(newEntryDiv); // Adds the new entry to the top of the list
