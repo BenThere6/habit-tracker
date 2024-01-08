@@ -577,19 +577,20 @@ footer {
         box-shadow: none;
     }
     #journal-entries {
-        padding: 0;
+        padding: 0 10px 0 10px;
     }
     #entryText {
         width: 100vw;
+        /* width: 100%; */
         /* width: calc(100% - 30px); */
-        position: absolute;
+        /* position: absolute; */
         top: 200px;
         left: 0px;
         height: 200px;
     }
-    #journal-submit {
+    /* #journal-submit {
         margin-top: 225px;
-    }
+    } */
 }
 
 @media screen and (max-width:623px) {
