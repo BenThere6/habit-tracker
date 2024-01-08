@@ -575,9 +575,10 @@ footer {
     #journal-content {
         width:100vw;
         box-shadow: none;
+        padding: 0;
     }
     #journal-entries {
-        padding: 0 10px 0 10px;
+        padding: 0 20px 0 20px;
     }
     #entryText {
         width: 100vw;
