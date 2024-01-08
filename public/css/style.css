@@ -579,6 +579,17 @@ footer {
     #journal-entries {
         padding: 0;
     }
+    #entryText {
+        /* width: 100vw; */
+        width: calc(100% - 26px);
+        position: absolute;
+        top: 200px;
+        left: 11px;
+        height: 200px;
+    }
+    #journal-submit {
+        margin-top: 225px;
+    }
 }
 
 @media screen and (max-width:623px) {
