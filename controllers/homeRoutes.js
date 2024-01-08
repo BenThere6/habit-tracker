@@ -13,8 +13,8 @@ router.get('/contact', (req, res) => {
     res.render('contact');
 });
 
-router.get('/settings', ensureAuthenticated, (req, res) => {
-    res.render('settings');
+router.get('/notifications', ensureAuthenticated, (req, res) => {
+    res.render('notifications');
 });
 
 router.get('/', (req,res) => {
