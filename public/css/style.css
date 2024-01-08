@@ -5,6 +5,7 @@
     --text-color: #fff; /* White */
     --accent-color: #3498db; /* Blue */
     --font-main: 'Montserrat', sans-serif;
+    --font-secondary: 'merriweather sans';
     --font-alternative: 'DM Serif Display', serif;
     --font-special: 'Rubik Doodle Shadow', cursive;
     --font-size-large: 40px;
@@ -16,6 +17,10 @@
     font-family: var(--font-main);
 }
 
+.font-secondary {
+    font-family: var(--font-secondary);
+}
+
 .font-alternative {
     font-family: var(--font-alternative);
 }
@@ -24,12 +29,12 @@
     font-family: var(--font-special);
 }
 
-.separate-border {
-    position: relative;
-}
-
 .wid-100 {
     width: 100%;
+}
+
+.separate-border {
+    position: relative;
 }
 
 .separate-border::before {
@@ -303,12 +308,12 @@ footer {
 
 .habit-title {
     padding-bottom:15px;
-    font-family: 'merriweather sans';
+    font-family: var(--font-secondary);
     text-align: center;
 }
 
 #new-habit-title {
-    font-family: 'merriweather sans';
+    font-family: var(--font-secondary);
     padding-top:30px;
 }
 
@@ -388,11 +393,6 @@ footer {
     font-size: 10px;
     background-color: rgb(55, 55, 55);
     border-radius: 0 0 50px 50px;
-}
-
-.form-container {
-    width: 300px;
-    height: 250px;
 }
 
 #habit-form {
@@ -502,6 +502,43 @@ footer {
     height: 500px;
 }
 
+/* Journal */
+#entryText {
+    height: 100px;
+}
+
+#journal-form-container {
+    width: 80%;
+    margin-bottom: 40px;
+}
+
+#habit-select {
+    width: calc(100% + 6px);
+    margin-bottom: 10px;
+}
+
+.journal-input {
+    width: 100%;
+}
+
+#journal-content {
+    width: 60vw;
+    max-width: 1400px;
+}
+
+#journal-entries {
+    text-align: start;
+}
+
+.journal-entry {
+    margin-bottom: 30px;
+}
+
+#journal-entries .journal-entry:not(:first-child) {
+    /* padding-top: 30px; */
+    border-top: #333 solid 2px;
+}
+
 @media screen and (max-width:892px) {
     header {
         font-size: 40px;
@@ -526,6 +563,9 @@ footer {
     }
     #dashboard-content, #contact-content {
         box-shadow: none;
+    }
+    #journal-content {
+        width:100vw;
     }
 }
 

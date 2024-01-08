@@ -100,16 +100,16 @@ async function displayJournalEntries(userId) {
 
     // Display entries
     const entriesContainer = document.getElementById('journal-entries');
-    entriesContainer.innerHTML = ''; // Clear existing entries
+    entriesContainer.innerHTML = '';
 
     entries.forEach(entry => {
         const entryDiv = document.createElement('div');
         entryDiv.className = 'journal-entry';
 
-        const habitName = entry.habit_id ? `Habit: ${habitMap[entry.habit_id]}` : 'General Entry';
+        const habitName = entry.habit_id ? ` - ${habitMap[entry.habit_id]}` : '';
         const entryDate = new Date(entry.entry_date).toLocaleDateString();
         entryDiv.innerHTML = `
-            <h3>${habitName} (${entryDate})</h3>
+            <h3 class="font-alternative">${entryDate} ${habitName} </h3>
             <p>${entry.entryText}</p>
         `;
 
