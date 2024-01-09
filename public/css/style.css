@@ -553,6 +553,12 @@ footer {
     top:0px;
     right:0px; */
     transition: transform 0.3s ease-in-out;
+    align-self: center;
+}
+
+.journal-entry-header {
+    display: flex;
+    justify-content: space-between;
 }
 
 .journal-trash-btn:hover {
