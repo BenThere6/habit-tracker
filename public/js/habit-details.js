@@ -5,8 +5,6 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     await updatePerformancesToday(habitId);
 
-    // updateLastPerformedDate(habitId);
-
     document.getElementById('markPerformedButton').addEventListener('click', async () => {
         await markHabitAsPerformed(habitId);
         
@@ -86,7 +84,6 @@ function formatDate(date) {
     } else {
         unformattedDate = new Date();
     }
-    // const currentDate = new Date();
     const year = unformattedDate.getFullYear();
     const month = (unformattedDate.getMonth() + 1).toString().padStart(2, '0');
     const day = unformattedDate.getDate().toString().padStart(2, '0');
@@ -143,18 +140,3 @@ async function updatePerformancesToday(habitId) {
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
-
-// async function updateLastPerformedDate(habitId) {
-//     try {
-//         const response = await fetch(`/api/habit/lastPerformedDate/${habitId}`);
-//         const data = await response.json();
-//         if (data.success) {
-//             const lastPerformedDate = document.querySelector('#lastPerformedDate');
-//             lastPerformedDate.textContent = markPerformed(data.lastPerformedDate);
-//         } else {
-//             console.error('Error:', data.error);
-//         }
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// }
