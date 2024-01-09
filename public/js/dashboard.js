@@ -50,7 +50,7 @@ async function displayHabits() {
 
                 for (const habit of data) {
                     const habitDiv = await createHabitTile(habit);
-                    
+
                     if (habit.habit_type === 'good') {
                         goodContainer.appendChild(habitDiv);
                     } else {
@@ -135,6 +135,13 @@ async function createHabitTile(habit) {
     habitName.textContent = habit.habit_name;
     habitName.className = 'habit-name';
     habitDiv.appendChild(habitName);
+
+    const infoIcon = document.createElement('img');
+    infoIcon.src = '/assets/information.png';
+    infoIcon.alt = 'Info';
+    infoIcon.className = 'habit-info-icon';
+    habitDiv.appendChild(infoIcon);
+
     habitDiv.addEventListener('click', function () {
         try {
             document.location.replace(`/api/habit/details/${habit.habit_id}`);
@@ -155,7 +162,6 @@ async function createHabitTile(habit) {
         numLabel.textContent = 'Current Streak';
 
         const streak = await getHabitStreak(habit.habit_id);
-
         const streakDiv = document.createElement('div');
         streakDiv.className = 'streak tile-num';
         streakDiv.textContent = streak;

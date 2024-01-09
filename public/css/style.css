@@ -331,6 +331,7 @@ footer {
     display:flex;
     flex-direction: column;
     position: relative;
+    box-shadow: 4px 4px 10px gray;
 }
 
 .habit-item:hover,
@@ -409,6 +410,16 @@ footer {
 .add-habit {
     height: 25px;
     margin: 10px 0 10px 0;
+}
+
+.habit-info-icon {
+    height: 12px;
+    width: 12px;
+    position: absolute;
+    bottom: 0.5px;
+    right: 10px;
+    filter: invert(100%);
+    z-index: 100;
 }
 
 /* Habit Details */
