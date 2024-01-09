@@ -547,6 +547,19 @@ footer {
     border-top: #333 solid 1px;
 }
 
+.journal-trash-btn {
+    height: 20px;
+    /* position: absolute;
+    top:0px;
+    right:0px; */
+    transition: transform 0.3s ease-in-out;
+}
+
+.journal-trash-btn:hover {
+    cursor: pointer;
+    transform: scale(1.4);
+}
+
 @media screen and (max-width:892px) {
     header {
         font-size: 40px;

@@ -106,16 +106,53 @@ async function displayJournalEntries(userId) {
     entries.forEach(entry => {
         const entryDiv = document.createElement('div');
         entryDiv.className = 'journal-entry';
-
+    
+        // Create a new div for the header (date/habit name and trash button)
+        const entryHeader = document.createElement('div');
+        entryHeader.className = 'journal-entry-header';
+    
+        const trashBtn = document.createElement('img');
+        trashBtn.className = 'journal-trash-btn';
+        trashBtn.src = '/assets/trash-bin.png';
+        trashBtn.alt = 'Delete';
+    
+        trashBtn.addEventListener('click', async function () {
+            try {
+                const deleteResponse = await fetch(`/api/journal/delete/${entry.entry_id}`, {
+                    method: 'DELETE'
+                });
+    
+                if (!deleteResponse.ok) {
+                    throw new Error('Failed to delete journal entry');
+                }
+    
+                displayJournalEntries(userId);
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        });
+    
         const habitName = entry.habit_id ? ` - ${habitMap[entry.habit_id]}` : '';
         const entryDate = new Date(entry.entry_date).toLocaleDateString();
-        entryDiv.innerHTML = `
-            <h3 class="font-alternative">${entryDate} ${habitName} </h3>
-            <p>${entry.entryText}</p>
-        `;
-
+        const entryTitle = document.createElement('h3');
+        entryTitle.className = 'font-alternative';
+        entryTitle.innerHTML = `${entryDate} ${habitName}`;
+    
+        // Append the title and trash button to the header div
+        entryHeader.appendChild(entryTitle);
+        entryHeader.appendChild(trashBtn);
+    
+        // Append the header div as the first child of the entryDiv
+        entryDiv.appendChild(entryHeader);
+    
+        const entryContent = document.createElement('p');
+        entryContent.innerHTML = entry.entryText;
+    
+        // Append the entry content to the entryDiv
+        entryDiv.appendChild(entryContent);
+    
         entriesContainer.appendChild(entryDiv);
-    });
+    });    
 }
 
 async function getUserID() {
