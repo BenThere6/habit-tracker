@@ -27,6 +27,10 @@ const deleteButton = document.getElementById('delete-btn');
 deleteButton.addEventListener('click', deleteCurrentHabit);
 
 async function deleteCurrentHabit() {
+    const confirmDelete = confirm(`Are you sure you want to delete this habit?`);
+    if (!confirmDelete) {
+        return;
+    }
     const habitId = getHabitIdFromURL();
     if (habitId) {
         try {

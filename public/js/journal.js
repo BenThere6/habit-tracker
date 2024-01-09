@@ -117,18 +117,21 @@ async function displayJournalEntries(userId) {
         trashBtn.alt = 'Delete';
     
         trashBtn.addEventListener('click', async function () {
-            try {
-                const deleteResponse = await fetch(`/api/journal/delete/${entry.entry_id}`, {
-                    method: 'DELETE'
-                });
-    
-                if (!deleteResponse.ok) {
-                    throw new Error('Failed to delete journal entry');
+            const confirmDelete = confirm(`Are you sure you want to delete your journal entry on ${entryDate}?`);
+            if (confirmDelete) {
+                try {
+                    const deleteResponse = await fetch(`/api/journal/delete/${entry.entry_id}`, {
+                        method: 'DELETE'
+                    });
+        
+                    if (!deleteResponse.ok) {
+                        throw new Error('Failed to delete journal entry');
+                    }
+        
+                    displayJournalEntries(userId);
+                } catch (error) {
+                    console.error('Error:', error);
                 }
-    
-                displayJournalEntries(userId);
-            } catch (error) {
-                console.error('Error:', error);
             }
         });
     
