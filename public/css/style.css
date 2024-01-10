@@ -413,12 +413,12 @@ footer {
 }
 
 .habit-info-icon {
-    height: 12px;
-    width: 12px;
+    height: 13px;
+    width: 13px;
     position: absolute;
-    bottom: 0.5px;
-    right: 10px;
-    filter: invert(100%);
+    bottom: 16px;
+    right: 3px;
+    /* filter: invert(100%); */
     z-index: 100;
 }
 
@@ -560,9 +560,6 @@ footer {
 
 .journal-trash-btn {
     height: 20px;
-    /* position: absolute;
-    top:0px;
-    right:0px; */
     transition: transform 0.3s ease-in-out;
     align-self: center;
 }
