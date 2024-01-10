@@ -425,6 +425,7 @@ footer {
 /* Habit Details */
 .details-container {
     position: relative;
+    font-family: var(--font-main);
 }
 
 #habit-id-el {
@@ -449,14 +450,21 @@ footer {
 #delete-btn {
     height: 20px;
     position: absolute;
-    top:10px;
-    right:10px;
+    top:5px;
+    right:5px;
     transition: transform 0.3s ease-in-out;
 }
 
 #delete-btn:hover {
     cursor: pointer;
     transform: scale(1.4);
+}
+
+#date-created-el {
+    position: absolute;
+    top: 5px;
+    width:100%;
+    left: 0;
 }
 
 /* Contact Page */
