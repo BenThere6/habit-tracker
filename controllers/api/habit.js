@@ -165,11 +165,13 @@ router.get('/details/:habitId', async (req, res) => {
             formattedDate = 'N/A';
         }
 
+        const formattedCreatedAt = moment(habitDetails.createdAt).format('MM/DD/YYYY');
         res.render('habit-details', {
             habit_name: habitDetails.habit_name,
             habit_type: habitDetails.habit_type,
             last_performed: formattedDate,
-            habit_id: habitDetails.habit_id
+            habit_id: habitDetails.habit_id,
+            created_at: formattedCreatedAt
         });
     } catch (err) {
         res.status(500).json({ success: false, error: 'Failed to fetch habit details' });

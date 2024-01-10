@@ -175,10 +175,17 @@ async function createHabitTile(habit) {
         habitDiv.className = 'habit-item bad-habit';
         numLabel.textContent = 'Days Without';
 
-        // Use Moment.js for date comparison
-        const lastPerformedDate = moment(habit.last_performed).startOf('day');
-        const currentDate = moment().startOf('day');
-        const daysSince = currentDate.diff(lastPerformedDate, 'days');
+        let daysSince;
+        if (habit.last_performed) {
+            const lastPerformedDate = moment(habit.last_performed).startOf('day');
+            const currentDate = moment().startOf('day');
+            daysSince = currentDate.diff(lastPerformedDate, 'days');
+        } else {
+            // Fallback to creation date if last_performed is not set
+            const creationDate = moment(habit.createdAt).startOf('day');
+            const currentDate = moment().startOf('day');
+            daysSince = currentDate.diff(creationDate, 'days');
+        }
 
         const daysSinceDiv = document.createElement('div');
         daysSinceDiv.className = 'days-since tile-num';
