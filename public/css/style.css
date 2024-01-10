@@ -10,7 +10,7 @@
     --font-special: 'Rubik Doodle Shadow', cursive;
     --font-size-large: 40px;
     --font-size-medium: 30px;
-    --font-size-small: 18px;
+    --font-size-small: 12px;
 }
 
 .font-main {
@@ -426,12 +426,14 @@ footer {
 .details-container {
     position: relative;
     font-family: var(--font-main);
+    min-width:400px;
 }
 
 #habit-id-el {
     position: absolute;
     top:5px;
     left:5px;
+    font-size: var(--font-size-small);
 }
 
 #back-button {
@@ -465,6 +467,7 @@ footer {
     top: 5px;
     width:100%;
     left: 0;
+    font-size: var(--font-size-small);
 }
 
 /* Contact Page */
@@ -617,16 +620,14 @@ footer {
     }
     #entryText {
         width: 100vw;
-        /* width: 100%; */
-        /* width: calc(100% - 30px); */
-        /* position: absolute; */
         top: 200px;
         left: 0px;
         height: 200px;
     }
-    /* #journal-submit {
-        margin-top: 225px;
-    } */
+    .details-container{
+        width: 90%;
+        min-width: auto;
+    }
 }
 
 @media screen and (max-width:623px) {

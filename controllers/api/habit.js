@@ -1,6 +1,6 @@
 const router = require('express').Router();
 const { sequelize, Habit, Performances } = require('../../models');
-const { Op } = require('sequelize');
+const { Op, NUMBER } = require('sequelize');
 const moment = require('moment-timezone');
 const userTimezone = 'America/Denver';
 
@@ -129,7 +129,7 @@ router.get('/streak/:habitId', async (req, res) => {
         }
 
         // Now check for today's performance and increment streak if present
-        const todayPerformance = performances.find(performance => 
+        const todayPerformance = performances.find(performance =>
             moment(performance.performance_date).tz(userTimezone).startOf('day').isSame(moment().tz(userTimezone).startOf('day'))
         );
         if (todayPerformance) {
@@ -157,6 +157,16 @@ router.get('/details/:habitId', async (req, res) => {
             return res.status(404).json({ success: false, error: 'Habit not found' });
         }
 
+        let createdAtDate = habitDetails.createdAt;
+        if (!createdAtDate) {
+            // Fetch the earliest performance date as fallback
+            const firstPerformance = await Performances.findOne({
+                where: { habit_id: habitId },
+                order: [['performance_date', 'ASC']]
+            });
+            createdAtDate = firstPerformance ? firstPerformance.performance_date : new Date();
+        }
+
         let formattedDate;
         if (habitDetails.last_performed) {
             const lastPerformedDate = moment(habitDetails.last_performed).tz(userTimezone);
@@ -165,13 +175,26 @@ router.get('/details/:habitId', async (req, res) => {
             formattedDate = 'N/A';
         }
 
-        const formattedCreatedAt = moment(habitDetails.createdAt).format('MM/DD/YYYY');
+        const currentDate = moment().startOf('day');
+        daysSince = currentDate.diff(moment(createdAtDate).startOf('day'), 'days');
+
+        let createdDays;
+        if (daysSince < 30) {
+            createdDays = daysSince === 1 ? '1 day ago' : `${daysSince} days ago`;
+        } else if (daysSince < 365) {
+            let months = Math.floor(daysSince / 30);
+            createdDays = months === 1 ? '1 month ago' : `${months} months ago`;
+        } else {
+            let years = Math.floor(daysSince / 365);
+            createdDays = years === 1 ? '1 year ago' : `${years} years ago`;
+        }
+
         res.render('habit-details', {
             habit_name: habitDetails.habit_name,
             habit_type: habitDetails.habit_type,
             last_performed: formattedDate,
             habit_id: habitDetails.habit_id,
-            created_at: formattedCreatedAt
+            created_at: createdDays
         });
     } catch (err) {
         res.status(500).json({ success: false, error: 'Failed to fetch habit details' });
@@ -181,22 +204,22 @@ router.get('/details/:habitId', async (req, res) => {
 
 router.post('/delete/:habitId', async (req, res) => {
     const habitId = req.params.habitId;
-  
+
     try {
-      const result = await Habit.deleteHabitById(habitId);
-  
-      if (result.success) {
-        // Habit deleted successfully
-        res.status(200).json({ success: true, message: result.message });
-      } else {
-        // Handle error cases
-        res.status(404).json({ success: false, error: result.error });
-      }
+        const result = await Habit.deleteHabitById(habitId);
+
+        if (result.success) {
+            // Habit deleted successfully
+            res.status(200).json({ success: true, message: result.message });
+        } else {
+            // Handle error cases
+            res.status(404).json({ success: false, error: result.error });
+        }
     } catch (error) {
-      console.error('Error:', error);
-      res.status(500).json({ success: false, error: 'Internal server error' });
+        console.error('Error:', error);
+        res.status(500).json({ success: false, error: 'Internal server error' });
     }
-  });
+});
 
 module.exports = router;
 
