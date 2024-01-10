@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         await updatePerformancesToday(habitId);
     
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
-        lastPerformedDate.textContent = formatDate(false);
+        lastPerformedDate.textContent = 'Today';
     });
 });
 

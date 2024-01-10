@@ -159,7 +159,6 @@ router.get('/details/:habitId', async (req, res) => {
 
         let createdAtDate = habitDetails.createdAt;
         if (!createdAtDate) {
-            // Fetch the earliest performance date as fallback
             const firstPerformance = await Performances.findOne({
                 where: { habit_id: habitId },
                 order: [['performance_date', 'ASC']]
@@ -176,23 +175,42 @@ router.get('/details/:habitId', async (req, res) => {
         }
 
         const currentDate = moment().startOf('day');
-        daysSince = currentDate.diff(moment(createdAtDate).startOf('day'), 'days');
+        const daysSinceCreated = currentDate.diff(moment(createdAtDate).startOf('day'), 'days');
+        const daysSinceLastPerformed = habitDetails.last_performed ? currentDate.diff(moment(habitDetails.last_performed).startOf('day'), 'days') : null;
 
-        let createdDays;
-        if (daysSince < 30) {
-            createdDays = daysSince === 1 ? '1 day ago' : `${daysSince} days ago`;
-        } else if (daysSince < 365) {
-            let months = Math.floor(daysSince / 30);
+        let createdDays, lastPerformedDays;
+        if (daysSinceCreated === 0) {
+            createdDays = 'today';
+        } else if (daysSinceCreated < 30) {
+            createdDays = daysSinceCreated === 1 ? '1 day ago' : `${daysSinceCreated} days ago`;
+        } else if (daysSinceCreated < 365) {
+            let months = Math.floor(daysSinceCreated / 30);
             createdDays = months === 1 ? '1 month ago' : `${months} months ago`;
         } else {
-            let years = Math.floor(daysSince / 365);
+            let years = Math.floor(daysSinceCreated / 365);
             createdDays = years === 1 ? '1 year ago' : `${years} years ago`;
         }
+
+        if (daysSinceLastPerformed !== null) {
+            if (daysSinceLastPerformed === 0) {
+                lastPerformedDays = 'Today';
+            } else if (daysSinceLastPerformed < 30) {
+                lastPerformedDays = daysSinceLastPerformed === 1 ? '1 day ago' : `${daysSinceLastPerformed} days ago`;
+            } else if (daysSinceLastPerformed < 365) {
+                let months = Math.floor(daysSinceLastPerformed / 30);
+                lastPerformedDays = months === 1 ? '1 month ago' : `${months} months ago`;
+            } else {
+                let years = Math.floor(daysSinceLastPerformed / 365);
+                lastPerformedDays = years === 1 ? '1 year ago' : `${years} years ago`;
+            }
+        } else {
+            lastPerformedDays = 'N/A';
+        }        
 
         res.render('habit-details', {
             habit_name: habitDetails.habit_name,
             habit_type: habitDetails.habit_type,
-            last_performed: formattedDate,
+            last_performed: lastPerformedDays,
             habit_id: habitDetails.habit_id,
             created_at: createdDays
         });
