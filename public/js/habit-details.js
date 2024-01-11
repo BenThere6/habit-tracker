@@ -15,6 +15,8 @@ document.addEventListener('DOMContentLoaded', async () => {
     
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = 'Today';
+
+        triggerConfetti();
     });
 });
 
@@ -143,4 +145,12 @@ async function updatePerformancesToday(habitId) {
 
 function delay(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
+}
+
+function triggerConfetti() {
+    confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: { y: 0.6 }
+    });
 }
