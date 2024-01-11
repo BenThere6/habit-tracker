@@ -16,7 +16,11 @@ document.addEventListener('DOMContentLoaded', async () => {
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = 'Today';
 
-        triggerConfetti();
+        habitType = document.getElementById('habitType');
+
+        if (habitType.textContent == 'good') {
+            triggerConfetti();
+        }
     });
 });
 

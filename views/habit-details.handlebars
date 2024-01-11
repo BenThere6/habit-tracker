@@ -3,7 +3,7 @@
     <div class="auth-container details-container">
         <img id='delete-btn' src="/assets/trash-bin.png" alt="trash-bin">
         <h1>{{habit_name}}</h1>
-        <p>Habit Type: {{habit_type}}</p>
+        <p>Habit Type: <span id="habitType">{{habit_type}}</span></p>
         <p>Last Performed: <span id="lastPerformedDate">{{last_performed}}</span></p>
         <p>Performances Today: <span id='performancesToday'>{{performances_today}}</span></p>
         <button class="submit-btn" id="markPerformedButton">Mark as Performed</button>
