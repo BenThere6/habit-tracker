@@ -18,6 +18,21 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
+document.getElementById('editButton').addEventListener('click', function() {
+    const currentName = document.querySelector('h1').textContent;
+    const habitId = document.getElementById('habitId').textContent;
+
+    document.querySelector('h1').innerHTML = `
+        <input type="text" id="editNameInput" value="${currentName}">
+        <button id="saveEditButton">Save</button>
+    `;
+
+    document.getElementById('saveEditButton').addEventListener('click', function() {
+        const newName = document.getElementById('editNameInput').value;
+        updateHabitName(habitId, newName); // Use the habitId here
+    });
+});
+
 const backButton = document.getElementById('back-button');
 backButton.addEventListener('click', function() {
     document.location.replace('/dashboard');
@@ -25,6 +40,27 @@ backButton.addEventListener('click', function() {
 
 const deleteButton = document.getElementById('delete-btn');
 deleteButton.addEventListener('click', deleteCurrentHabit);
+
+async function updateHabitName(habitId, newName) {
+    try {
+        const response = await fetch(`/api/habit/update/${habitId}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ habitName: newName })
+        });
+
+        if (response.ok) {
+            // Update the habit name on the page
+            document.querySelector('h1').textContent = newName;
+        } else {
+            console.error('Failed to update habit name');
+        }
+    } catch (error) {
+        console.error('Error:', error);
+    }
+}
 
 async function deleteCurrentHabit() {
     const confirmDelete = confirm(`Are you sure you want to delete this habit?`);

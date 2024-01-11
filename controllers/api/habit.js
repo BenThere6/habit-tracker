@@ -239,14 +239,22 @@ router.post('/delete/:habitId', async (req, res) => {
     }
 });
 
+router.put('/update/:habitId', async (req, res) => {
+    try {
+        const { habitId } = req.params;
+        const { habitName } = req.body;
+
+        await Habit.update({ habit_name: habitName }, {
+            where: {
+                habit_id: habitId,
+                user_id: req.user.id
+            }
+        });
+
+        res.json({ success: true, message: 'Habit name updated successfully' });
+    } catch (error) {
+        res.status(500).json({ success: false, error: 'Failed to update habit name' });
+    }
+});
+
 module.exports = router;
-
-/*
-
-INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-10-31 17:14:08');
-INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-10-30 17:14:08');
-INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-10-29 17:14:08');
-INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-10-28 17:14:08');
-INSERT INTO performances (user_id, habit_id, performance_date) VALUES (1, 1, '2023-10-27 17:14:08');
-
-*/
