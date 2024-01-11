@@ -436,6 +436,17 @@ footer {
     font-size: var(--font-size-small);
 }
 
+#editButton {
+    border: none;
+    background-color: inherit;
+    color: var(--primary-color);
+    text-decoration: underline;
+}
+
+#saveEditButton {
+    width: 50px;
+}
+
 #back-button {
     height: 40px;
     position: absolute;

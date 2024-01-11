@@ -7,34 +7,55 @@ document.addEventListener('DOMContentLoaded', async () => {
 
     document.getElementById('markPerformedButton').addEventListener('click', async () => {
         await markHabitAsPerformed(habitId);
-        
+
         // Wait for a short delay to ensure the server has processed the update
         await delay(500);
-    
+
         await updatePerformancesToday(habitId);
-    
+
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = 'Today';
     });
 });
 
+let originalName = ''; // To store the original habit name
+
 document.getElementById('editButton').addEventListener('click', function() {
-    const currentName = document.querySelector('h1').textContent;
+    const editButton = this;
+    const habitNameElement = document.querySelector('h1');
     const habitId = document.getElementById('habitId').textContent;
 
-    document.querySelector('h1').innerHTML = `
-        <input type="text" id="editNameInput" value="${currentName}">
-        <button id="saveEditButton">Save</button>
-    `;
+    if (editButton.textContent === 'Edit') {
+        originalName = habitNameElement.textContent.trim();
+        // Change to edit mode
+        habitNameElement.innerHTML = `
+            <input type="text" id="editNameInput" value="${originalName}">
+        `;
+        editButton.textContent = 'Cancel';
 
-    document.getElementById('saveEditButton').addEventListener('click', function() {
-        const newName = document.getElementById('editNameInput').value;
-        updateHabitName(habitId, newName); // Use the habitId here
-    });
+        // Create a save button
+        const saveButton = document.createElement('button');
+        saveButton.id = 'saveEditButton';
+        saveButton.className = 'submit-btn';
+        saveButton.textContent = 'Save';
+        habitNameElement.appendChild(saveButton);
+
+        // Save button event listener
+        saveButton.addEventListener('click', function() {
+            const newName = document.getElementById('editNameInput').value;
+            updateHabitName(habitId, newName);
+            editButton.textContent = 'Edit';
+        });
+
+    } else {
+        // Cancel the edit and revert to the original name
+        habitNameElement.textContent = originalName;
+        editButton.textContent = 'Edit';
+    }
 });
 
 const backButton = document.getElementById('back-button');
-backButton.addEventListener('click', function() {
+backButton.addEventListener('click', function () {
     document.location.replace('/dashboard');
 })
 
@@ -138,19 +159,19 @@ function markHabitAsPerformed(habitId) {
                 'Content-Type': 'application/json',
             },
         })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                resolve(data);
-            } else {
-                console.error('Error:', data.error);
-                reject(data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error:', error);
-            reject(error);
-        });
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    resolve(data);
+                } else {
+                    console.error('Error:', data.error);
+                    reject(data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                reject(error);
+            });
     });
 }
 
