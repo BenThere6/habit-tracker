@@ -44,6 +44,12 @@ Habit.init(
     last_performed: {
       type: DataTypes.DATE,
     },
+    best_streak: {
+      type: DataTypes.INTEGER,
+    },
+    streak_ended_date: {
+      type: DataTypes.DATE,
+    }
   },
   {
     sequelize,
