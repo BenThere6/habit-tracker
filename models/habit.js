@@ -55,10 +55,8 @@ Habit.init(
     sequelize,
     timestamps: true,
     freezeTableName: true,
-    underscored: false,
-    modelName: 'habit',
-    createdAt: 'created_at',
-    updatedAt: 'updated_at'
+    underscored: true,
+    modelName: 'habit'
   }
 );
 
