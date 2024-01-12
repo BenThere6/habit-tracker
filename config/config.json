@@ -1,22 +1,22 @@
 {
   "development": {
-    "username": "root",
-    "password": "pizza",
-    "database": "database_development",
+    "username": "d64lko88i5ul7gz2",
+    "password": "x6vwrc17zuoui7p4",
+    "database": "jetjp5kjc2hjwvpk",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": "pizza",
-    "database": "database_test",
+    "username": "d64lko88i5ul7gz2",
+    "password": "x6vwrc17zuoui7p4",
+    "database": "jetjp5kjc2hjwvpk",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
   "production": {
-    "username": "root",
-    "password": "pizza",
-    "database": "database_production",
+    "username": "d64lko88i5ul7gz2",
+    "password": "x6vwrc17zuoui7p4",
+    "database": "jetjp5kjc2hjwvpk",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }
