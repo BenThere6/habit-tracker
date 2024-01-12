@@ -57,6 +57,8 @@ Habit.init(
     freezeTableName: true,
     underscored: false,
     modelName: 'habit',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
   }
 );
 
