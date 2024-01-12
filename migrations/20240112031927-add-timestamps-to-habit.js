@@ -5,15 +5,15 @@ module.exports = {
     // Check if the column already exists before adding it
     const tableInfo = await queryInterface.describeTable('habit');
 
-    if (!tableInfo.createdAt) {
-      await queryInterface.addColumn('habit', 'createdAt', {
+    if (!tableInfo.created_at) {
+      await queryInterface.addColumn('habit', 'created_at', {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
       });
     }
-    if (!tableInfo.updatedAt) {
-      await queryInterface.addColumn('habit', 'updatedAt', {
+    if (!tableInfo.updated_at) {
+      await queryInterface.addColumn('habit', 'updated_at', {
         type: Sequelize.DATE,
         allowNull: false,
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
@@ -22,7 +22,7 @@ module.exports = {
   },
 
   down: async (queryInterface, Sequelize) => {
-    await queryInterface.removeColumn('habit', 'createdAt');
-    await queryInterface.removeColumn('habit', 'updatedAt');
+    await queryInterface.removeColumn('habit', 'created_at');
+    await queryInterface.removeColumn('habit', 'updated_at');
   }
 };
