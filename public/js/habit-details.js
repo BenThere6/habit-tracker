@@ -6,23 +6,19 @@ document.addEventListener('DOMContentLoaded', async () => {
     await updatePerformancesToday(habitId);
 
     document.getElementById('markPerformedButton').addEventListener('click', async () => {
-        const markPerformedButton = document.getElementById('markPerformedButton');
-        markPerformedButton.disabled = true;
-        // markPerformedButton.style.color = 'gray';
-
         await markHabitAsPerformed(habitId);
-        await delay(750);
 
-        markPerformedButton.disabled = false;
-        // markPerformedButton.style.color = 'white';
+        // Wait for a short delay to ensure the server has processed the update
+        await delay(500);
 
         await updatePerformancesToday(habitId);
 
         const lastPerformedDate = document.querySelector('#lastPerformedDate');
         lastPerformedDate.textContent = 'Today';
 
-        const habitType = document.getElementById('habitType').textContent;
-        if (habitType === 'good') {
+        habitType = document.getElementById('habitType');
+
+        if (habitType.textContent == 'good') {
             triggerConfetti();
         }
     });
@@ -30,7 +26,7 @@ document.addEventListener('DOMContentLoaded', async () => {
 
 let originalName = ''; // To store the original habit name
 
-document.getElementById('editButton').addEventListener('click', function () {
+document.getElementById('editButton').addEventListener('click', function() {
     const editButton = this;
     const habitNameElement = document.querySelector('h1');
     const habitId = document.getElementById('habitId').textContent;
@@ -51,7 +47,7 @@ document.getElementById('editButton').addEventListener('click', function () {
         habitNameElement.appendChild(saveButton);
 
         // Save button event listener
-        saveButton.addEventListener('click', function () {
+        saveButton.addEventListener('click', function() {
             const newName = document.getElementById('editNameInput').value;
             updateHabitName(habitId, newName);
             editButton.textContent = 'Edit';

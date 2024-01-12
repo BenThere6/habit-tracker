@@ -339,14 +339,6 @@ footer {
     cursor: pointer;
 }
 
-#markPerformedButton:disabled {
-    color: gray;
-}
-
-#markPerformedButton:disabled:active {
-    background-color: var(--primary-color)
-}
-
 .good-habit {
     background-color: var(--primary-color);
     color: var(--text-color);
