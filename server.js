@@ -10,35 +10,33 @@ const { engine } = require('express-handlebars');
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog');
 const sessionSecret = crypto.randomBytes(32).toString('hex');
-// const RedisStore = require('connect-redis').default;
-// const redis = require('redis');
+const RedisStore = require('connect-redis').default;
+const Redis = require('ioredis');
 
 const app = express();
 
-// console.log('Redis URL:', process.env.REDIS_URL);
+console.log('Redis URL:', process.env.REDISCLOUD_URL);
 
 app.use(clog);
 app.use(bodyParser.json());
 
-// const redisClient = redis.createClient({
-//     url: process.env.REDISCLOUD_URL,
-//     legacyMode: true
-// });
+const redisClient = new Redis(process.env.REDISCLOUD_URL, { legacyMode: true });
 // redisClient.connect().catch(console.error);
-// redisClient.on('error', (err) => console.log('Redis Client Error', err));
 
-// app.use(session({
-//     store: new RedisStore({ client: redisClient }),
-//     secret: sessionSecret,
-//     resave: false,
-//     saveUninitialized: true,
-//     cookie: {
-//         httpOnly: true,
-//         secure: process.env.NODE_ENV === "production",
-//         sameSite: 'strict'
-//     }
-// }));
-app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
+app.use(session({
+    store: new RedisStore({ client: redisClient }),
+    secret: sessionSecret,
+    resave: false,
+    saveUninitialized: false,
+    cookie: {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: 'strict',
+        maxAge: 30 * 24 * 60 * 60 * 1000
+    }
+}));
+
+// app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
