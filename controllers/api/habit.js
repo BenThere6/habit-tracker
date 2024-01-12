@@ -39,9 +39,9 @@ router.get('/fetch', async (req, res) => {
         const userHabits = await Habit.findAll({
             where: { user_id: userId },
         });
-
         res.json(userHabits);
     } catch (error) {
+        console.error("Error fetching habits:", error);
         res.status(500).json({ error: 'Failed to fetch habits' });
     }
 });
