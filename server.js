@@ -20,23 +20,22 @@ const app = express();
 app.use(clog);
 app.use(bodyParser.json());
 
-const redisClient = new Redis(process.env.REDISCLOUD_URL, { legacyMode: true });
-// redisClient.connect().catch(console.error);
+// const redisClient = new Redis(process.env.REDISCLOUD_URL, { legacyMode: true });
 
-app.use(session({
-    store: new RedisStore({ client: redisClient }),
-    secret: process.env.SESS_KEY,
-    resave: false,
-    saveUninitialized: false,
-    cookie: {
-        httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: 'strict',
-        maxAge: 30 * 24 * 60 * 60 * 1000
-    }
-}));
+// app.use(session({
+//     store: new RedisStore({ client: redisClient }),
+//     secret: process.env.SESS_KEY,
+//     resave: false,
+//     saveUninitialized: false,
+//     cookie: {
+//         httpOnly: true,
+//         secure: process.env.NODE_ENV === "production",
+//         sameSite: 'strict',
+//         maxAge: 30 * 24 * 60 * 60 * 1000
+//     }
+// }));
 
-// app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
+app.use(session({ secret: sessionSecret, resave: false, saveUninitialized: true }));
 
 app.use(passport.initialize());
 app.use(passport.session());
