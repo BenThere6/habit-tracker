@@ -9,7 +9,7 @@ const { User } = require('./models');
 const { engine } = require('express-handlebars');
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog');
-// const sessionSecret = crypto.randomBytes(32).toString('hex');
+const sessionSecret = crypto.randomBytes(32).toString('hex');
 const RedisStore = require('connect-redis').default;
 const Redis = require('ioredis');
 
