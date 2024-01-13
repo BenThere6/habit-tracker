@@ -9,13 +9,13 @@ const { User } = require('./models');
 const { engine } = require('express-handlebars');
 const crypto = require('crypto');
 const { clog } = require('./middleware/clog');
-const sessionSecret = crypto.randomBytes(32).toString('hex');
+// const sessionSecret = crypto.randomBytes(32).toString('hex');
 const RedisStore = require('connect-redis').default;
 const Redis = require('ioredis');
 
 const app = express();
 
-console.log('Redis URL:', process.env.REDISCLOUD_URL);
+// console.log('Redis URL:', process.env.REDISCLOUD_URL);
 
 app.use(clog);
 app.use(bodyParser.json());
@@ -25,7 +25,7 @@ const redisClient = new Redis(process.env.REDISCLOUD_URL, { legacyMode: true });
 
 app.use(session({
     store: new RedisStore({ client: redisClient }),
-    secret: sessionSecret,
+    secret: process.env.SESS_KEY,
     resave: false,
     saveUninitialized: false,
     cookie: {
